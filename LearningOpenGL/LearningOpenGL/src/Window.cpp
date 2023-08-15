@@ -2,7 +2,7 @@
 
 namespace FOGrP
 {
-	void* MouseListener::app;
+	//void* MouseListener::app;
 
 	Window::Window()
 	{
@@ -10,10 +10,10 @@ namespace FOGrP
 		mHeight = 0;
 	}
 
-	template<class APPLICATION>
-	void Window::Create(APPLICATION* app, int w, int h, const char* name)
+	//template<class APPLICATION>
+	void Window::Create(/*APPLICATION* app, */int w, int h, const char* name)
 	{
-		interface.app = app;
+		//interface.app = app;
 
 		mWidth = w; mHeight = h;
 
@@ -29,9 +29,9 @@ namespace FOGrP
 		glfwSwapInterval(1); //<-- force interval (not guaranteed to work with all graphics drivers)
 
 		//register callbacks for keyboard and mouse
-		glfwSetKeyCallback(window, MouseListener::OnKeyDown<APPLICATION>);
+		/*glfwSetKeyCallback(window, MouseListener::OnKeyDown<APPLICATION>);
 		glfwSetCursorPosCallback(window, MouseListener::OnMouseMove<APPLICATION>);
-		glfwSetMouseButtonCallback(window, MouseListener::OnMouseDown<APPLICATION>);
+		glfwSetMouseButtonCallback(window, MouseListener::OnMouseDown<APPLICATION>);*/
 
 	}
 

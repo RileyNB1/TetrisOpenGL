@@ -7,7 +7,7 @@ namespace FOGrP
 	class Window
 	{
         GLFWwindow* window;
-        MouseListener interface;
+        //MouseListener interface;
 
         int mWidth, mHeight;
 
@@ -16,8 +16,8 @@ namespace FOGrP
         Window();
 
         //Create a Window Context
-        template<class APPLICATION>
-        void Create(APPLICATION* app, int w, int h, const char* name = "demo");
+        //template<class APPLICATION>
+        void Create(/*APPLICATION* app, */int w, int h, const char* name = "demo");
 
         int Width() const;
         int Height() const;

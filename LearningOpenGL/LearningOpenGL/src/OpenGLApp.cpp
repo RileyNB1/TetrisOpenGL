@@ -9,7 +9,7 @@ namespace FOGrP
             exit(EXIT_FAILURE);
         }
 
-        mWindow.Create(this, width, height, "GLFW");
+        mWindow.Create(/*this, */width, height, "GLFW");
 
         // Init Glew **************************
         glewExperimental = true;
@@ -82,6 +82,7 @@ namespace FOGrP
 
     void OpenGLApp::OnDraw()
     {
+        Draw();
     }
 
     void OpenGLApp::OnMouseMove(int x, int y)

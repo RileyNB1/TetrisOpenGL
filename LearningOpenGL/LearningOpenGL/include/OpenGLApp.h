@@ -4,6 +4,8 @@
 #include <Window.h>
 #include <iostream>
 
+void Draw();
+
 namespace FOGrP
 {
 	class OpenGLApp
