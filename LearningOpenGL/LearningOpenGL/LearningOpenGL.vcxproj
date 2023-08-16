@@ -157,13 +157,17 @@
   <ItemGroup>
     <ClCompile Include="include\MouseListener.h" />
     <ClCompile Include="LearningOpenGL.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\OpenGLApp.cpp" />
     <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\TriangleBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GL_Lib.h" />
     <ClInclude Include="include\OpenGLApp.h" />
     <ClInclude Include="include\Window.h" />
+    <ClInclude Include="include\Shader.h" />
+    <ClInclude Include="include\TriangleBuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,6 +3,7 @@
 #include <GL_Lib.h>
 #include <Window.h>
 #include <iostream>
+#include <TriangleBuffer.h>
 
 void Draw();
 
@@ -11,6 +12,8 @@ namespace FOGrP
 	class OpenGLApp
 	{
         Window mWindow;
+
+        TriangleBuffer mTris;
 
     public:
 

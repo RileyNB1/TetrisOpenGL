@@ -50,6 +50,9 @@ namespace FOGrP
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         glLineWidth(3);
+
+        mTris.Init();
+        mTris.BindVertexData();
     }
 
     Window& OpenGLApp::Window()
@@ -82,7 +85,8 @@ namespace FOGrP
 
     void OpenGLApp::OnDraw()
     {
-        Draw();
+        //Draw();
+        mTris.Draw();
     }
 
     void OpenGLApp::OnMouseMove(int x, int y)
