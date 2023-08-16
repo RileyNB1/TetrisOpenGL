@@ -86,7 +86,7 @@ namespace FOGrP
     void OpenGLApp::OnDraw()
     {
         //Draw();
-        mTris.Draw();
+        mTris.Draw(mWindow);
     }
 
     void OpenGLApp::OnMouseMove(int x, int y)

@@ -13,20 +13,20 @@ namespace FOGrP
 
     varying vec4 dstColor;
 
-    void main() {
+    uniform mat4 ortho;                //<-- new uniform matrix
 
-        dstColor = color/2;
-        gl_Position = position;
+    void main() {
+        dstColor = color;
+        gl_Position = ortho * position;  //<-- matrix gets multiplied by the position
     }
 
     );
 
     const char* frag = GLSL(120,
 
-        varying vec4 dstColor;
+    varying vec4 dstColor;
 
     void main() {
-
         gl_FragColor = dstColor;
     }
 
@@ -66,6 +66,7 @@ namespace FOGrP
     {
         positionID = glGetAttribLocation(mTrisShader->Id(), "position");
         colorID = glGetAttribLocation(mTrisShader->Id(), "color");
+        orthoID = glGetUniformLocation(mTrisShader->Id(), "ortho");
 
         glUseProgram(0);
 
@@ -108,10 +109,16 @@ namespace FOGrP
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
-    void TriangleBuffer::Draw()
+    void TriangleBuffer::Draw(const Window& window)
     {
         //Bind Shader and Vertex Array Object
         glUseProgram(mTrisShader->Id());
+
+        //glm is picky about using floats: use .f!
+        glm::mat4 ortho = glm::ortho(-window.AspectRatio(), window.AspectRatio(), -1.f, 1.f, -1.f, 1.f);
+        //set uniform in shader
+        glUniformMatrix4fv(orthoID, 1, GL_FALSE, glm::value_ptr(ortho));
+
         BINDVERTEXARRAY(arrayID);
 
         //Draw Triangle

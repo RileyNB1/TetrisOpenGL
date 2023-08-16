@@ -3,6 +3,7 @@
 #include <GL_Lib.h>
 
 #include <vector>
+#include <Window.h>
 #include <Shader.h>
 
 //macro to write shader programs inline
@@ -63,7 +64,7 @@ namespace FOGrP
         Shader *mTrisShader;
 
         //ID of Vertex Attribute
-        GLuint positionID, colorID;
+        GLuint positionID, colorID, orthoID;
         //A buffer ID
         GLuint bufferID;
         //A Vertex Array ID
@@ -77,7 +78,7 @@ namespace FOGrP
 
         void BindVertexData();
 
-        void Draw();
+        void Draw(const Window& window);
 
         ~TriangleBuffer();
     };
