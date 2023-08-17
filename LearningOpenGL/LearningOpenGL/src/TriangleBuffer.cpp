@@ -11,13 +11,11 @@ namespace FOGrP
     attribute vec4 position;
     attribute vec4 color;
 
-    varying vec4 dstColor;
-
-    uniform mat4 ortho;                //<-- new uniform matrix
+    varying vec4 dstColor;             //<-- new uniform matrix
 
     void main() {
         dstColor = color;
-        gl_Position = ortho * position;  //<-- matrix gets multiplied by the position
+        gl_Position = position;  //<-- matrix gets multiplied by the position
     }
 
     );
@@ -40,14 +38,14 @@ namespace FOGrP
     {
         Vertex v1, v2, v3;
 
-        v1.position = Vec2(-1, -0.5);
-        v1.color = Vec4(1, 0, 0, 1);
+        v1.position = glm::vec2(-1, -0.5);
+        v1.color = glm::vec4(1, 0, 0, 1);
 
-        v2.position = Vec2(0, 1);
-        v2.color = Vec4(0, 1, 0, 1);
+        v2.position = glm::vec2(0, 1);
+        v2.color = glm::vec4(0, 1, 0, 1);
 
-        v3.position = Vec2(1, -0.5);
-        v3.color = Vec4(0, 1, 0, 1);
+        v3.position = glm::vec2(1, -0.5);
+        v3.color = glm::vec4(0, 0, 1, 1);
 
         //Specify the 3 VERTICES of A Triangle
         mTris.push_back(v1);
@@ -66,7 +64,6 @@ namespace FOGrP
     {
         positionID = glGetAttribLocation(mTrisShader->Id(), "position");
         colorID = glGetAttribLocation(mTrisShader->Id(), "color");
-        orthoID = glGetUniformLocation(mTrisShader->Id(), "ortho");
 
         glUseProgram(0);
 
@@ -99,7 +96,7 @@ namespace FOGrP
 
         // Tell OpenGL how to handle the buffer of data that is already on the GPU
         glVertexAttribPointer(positionID, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-        glVertexAttribPointer(colorID, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)sizeof(Vec2));
+        glVertexAttribPointer(colorID, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)sizeof(glm::vec2));
 
         BINDVERTEXARRAY(0);
 
@@ -113,11 +110,6 @@ namespace FOGrP
     {
         //Bind Shader and Vertex Array Object
         glUseProgram(mTrisShader->Id());
-
-        //glm is picky about using floats: use .f!
-        glm::mat4 ortho = glm::ortho(-window.AspectRatio(), window.AspectRatio(), -1.f, 1.f, -1.f, 1.f);
-        //set uniform in shader
-        glUniformMatrix4fv(orthoID, 1, GL_FALSE, glm::value_ptr(ortho));
 
         BINDVERTEXARRAY(arrayID);
 
