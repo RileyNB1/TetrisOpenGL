@@ -164,7 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GL_Lib.h" />
-    <ClInclude Include="include\Macros.h" />
     <ClInclude Include="include\OpenGLApp.h" />
     <ClInclude Include="include\Window.h" />
     <ClInclude Include="include\Shader.h" />
