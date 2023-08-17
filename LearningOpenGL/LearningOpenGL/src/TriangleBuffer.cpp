@@ -1,4 +1,4 @@
-#include "TriangleBuffer.h"
+#include <TriangleBuffer.h>
 
 namespace FOGrP
 {
@@ -13,9 +13,14 @@ namespace FOGrP
 
     varying vec4 dstColor;             //<-- new uniform matrix
 
+
+    uniform mat4 model;
+    uniform mat4 view;                                      //<-- 4x4 Transformation Matrices
+    uniform mat4 projection;
+
     void main() {
         dstColor = color;
-        gl_Position = position;  //<-- matrix gets multiplied by the position
+        gl_Position = projection * view * model * position;   //<-- Apply transformation 
     }
 
     );
@@ -31,26 +36,45 @@ namespace FOGrP
     );
 
     TriangleBuffer::TriangleBuffer()
-    {    
+    {
+        mWindow = 0;
     }
 
-    void FOGrP::TriangleBuffer::Init()
+    void FOGrP::TriangleBuffer::Init(Window* window)
     {
+        mWindow = window;
         Vertex v1, v2, v3;
 
-        v1.position = glm::vec2(-1, -0.5);
+        v1.position = glm::vec2(-1, 0);
         v1.color = glm::vec4(1, 0, 0, 1);
 
         v2.position = glm::vec2(0, 1);
         v2.color = glm::vec4(0, 1, 0, 1);
 
-        v3.position = glm::vec2(1, -0.5);
+        v3.position = glm::vec2(1, 0);
         v3.color = glm::vec4(0, 0, 1, 1);
 
         //Specify the 3 VERTICES of A Triangle
         mTris.push_back(v1);
         mTris.push_back(v2);
         mTris.push_back(v3);
+
+        /*-----------------------------------------------------------------------------
+        *  View Transform: Eye Position        Target             Up Direction
+        *-----------------------------------------------------------------------------*/
+        view = glm::lookAt(glm::vec3(0, 0, 2), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+
+        /*-----------------------------------------------------------------------------
+         *  Projection Transform:  Field of View     Ratio                     Near   Far
+         *-----------------------------------------------------------------------------*/
+         // glm requires us to use floats!  use .f or else you'll get compiler errors
+        proj = glm::perspective(PI / 3.0f, (float)mWindow->AspectRatio(), 0.1f, -10.0f);
+
+        /*-----------------------------------------------------------------------------
+         *  Send view and projection matrices to Shader Uniforms
+         *-----------------------------------------------------------------------------*/
+        glUniformMatrix4fv(viewID, 1, GL_FALSE, glm::value_ptr(view));
+        glUniformMatrix4fv(projectionID, 1, GL_FALSE, glm::value_ptr(proj));
 
         /*-----------------------------------------------------------------------------
          *  CREATE THE SHADER
@@ -65,8 +89,10 @@ namespace FOGrP
         positionID = glGetAttribLocation(mTrisShader->Id(), "position");
         colorID = glGetAttribLocation(mTrisShader->Id(), "color");
 
-        glUseProgram(0);
-
+        // Get uniform locations
+        modelID = glGetUniformLocation(mTrisShader->Id(), "model");
+        viewID = glGetUniformLocation(mTrisShader->Id(), "view");
+        projectionID = glGetUniformLocation(mTrisShader->Id(), "projection");
 
         //| x | y | r | g | b | a| |x | y | r | g | b | a| |x | y | r | g | b | a |
             /*-----------------------------------------------------------------------------
@@ -106,15 +132,32 @@ namespace FOGrP
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
-    void TriangleBuffer::Draw(const Window& window)
+    void TriangleBuffer::Draw()
     {
+        static float time = 0.0;
+        time += .01;
         //Bind Shader and Vertex Array Object
         glUseProgram(mTrisShader->Id());
 
         BINDVERTEXARRAY(arrayID);
 
-        //Draw Triangle
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        for (int i = 0; i < 100; ++i) {
+
+            /*-----------------------------------------------------------------------------
+             *  Create transformation matrices
+             *-----------------------------------------------------------------------------*/
+            glm::mat4 translate = glm::translate(glm::mat4(1), glm::vec3(sin(time), 0, (float)i / 100));
+            glm::mat4 rotate = glm::rotate(glm::mat4(1), time * PI * i / 100, glm::vec3(0, 0, 1));
+            glm::mat4 scale = glm::scale(glm::mat4(1), glm::vec3(1.0f - (float)i / 100));
+
+            /*-----------------------------------------------------------------------------
+             *  Scale, then Rotate, then Translate = translate * rotate * scale
+             *-----------------------------------------------------------------------------*/
+            glm::mat4 model = translate * rotate * scale;
+
+            glUniformMatrix4fv(modelID, 1, GL_FALSE, glm::value_ptr(model));
+            glDrawArrays(GL_TRIANGLES, 0, 3);
+        }
 
         //Unbind Vertex Array Object and Shader
         BINDVERTEXARRAY(0);

@@ -1,29 +1,10 @@
 #pragma once
 
-#include <GL_Lib.h>
+#include <Macros.h>
 
 #include <vector>
 #include <Window.h>
 #include <Shader.h>
-
-//macro to write shader programs inline
-#ifndef GLSL 
-#define GLSL(version,A) "#version " #version "\n" #A
-#endif
-
-//macro to pick the right glGenVertexArray function
-#ifndef GENVERTEXARRAYS
-#define GENVERTEXARRAYS(n,id) \
-  if(GLEW_APPLE_vertex_array_object) glGenVertexArraysAPPLE(1,id);\
-	else if (GLEW_ARB_vertex_array_object) glGenVertexArrays(n,id)
-#endif
-
-//macro to pick the right glBindVertexArray function
-#ifndef BINDVERTEXARRAY
-#define BINDVERTEXARRAY(id) \
-  if(GLEW_APPLE_vertex_array_object) glBindVertexArrayAPPLE(id);\
-	else if (GLEW_ARB_vertex_array_object) glBindVertexArray(id)
-#endif
 
 class Vertex
 {
@@ -45,16 +26,22 @@ namespace FOGrP
         GLuint bufferID;
         //A Vertex Array ID
         GLuint arrayID;
+        //ID of Uniform
+        GLuint modelID, viewID, projectionID;
+
+        Window* mWindow;
+
+        glm::mat4 model, view, proj;
 
     public:
 
         TriangleBuffer();
 
-        void Init();
+        void Init(Window* window);
 
         void BindVertexData();
 
-        void Draw(const Window& window);
+        void Draw();
 
         ~TriangleBuffer();
     };
