@@ -51,10 +51,11 @@ namespace FOGrP
 
         glLineWidth(3);
 
-        /*mTris.Init(&mWindow);
-        mTris.BindVertexData();*/
+        //mTris.Init(&mWindow);
 
-        mCube.Init(&mWindow);
+        //mCube.Init(&mWindow);
+
+        mesh.Init(&mWindow);
     }
 
     Window& OpenGLApp::Window()
@@ -88,7 +89,9 @@ namespace FOGrP
     void OpenGLApp::OnDraw()
     {
         //mTris.Draw();
-        mCube.Draw();
+        //mCube.Draw();
+
+        mesh.Draw();
     }
 
     void OpenGLApp::OnMouseMove(int x, int y)

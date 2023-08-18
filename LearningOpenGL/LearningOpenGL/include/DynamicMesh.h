@@ -1,24 +1,16 @@
 #pragma once
 
 #include <Macros.h>
-
-#include <vector>
-#include <Window.h>
 #include <Shader.h>
+#include <Window.h>
+#include <vector>
 
 namespace FOGrP
 {
-    class TrisVertex
-    {
-    public:
-        glm::vec2 position;
-        glm::vec4 color;
-    };
-
-    class TriangleBuffer
-    {
-        TrisVertex mTris[3];
-        Shader *mShader;
+	class DynamicMesh
+	{
+        Vertex mTris[3];
+        Shader* mShader;
 
         //ID of Vertex Attribute
         GLuint positionID, colorID;
@@ -26,16 +18,24 @@ namespace FOGrP
         GLuint bufferID;
         //A Vertex Array ID
         GLuint arrayID;
+        GLuint elementID;
         //ID of Uniform
         GLuint modelID, viewID, projectionID;
 
         Window* mWindow;
 
-        glm::mat4 model, view, proj;
+        glm::mat4 model, view, proj; 
+        
+        int w;
+        int h;
+        //A Container for Vertices
+        std::vector<Vertex> vertices;
+        //A Container for indices
+        std::vector<unsigned short> indices;
 
     public:
 
-        TriangleBuffer();
+        DynamicMesh();
 
         void Init(Window* window);
 
@@ -43,7 +43,7 @@ namespace FOGrP
 
         void Draw();
 
-        ~TriangleBuffer();
-    };
+        ~DynamicMesh();
+	};
 }
 

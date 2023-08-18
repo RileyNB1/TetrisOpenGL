@@ -3,8 +3,9 @@
 #include <GL_Lib.h>
 #include <Window.h>
 #include <iostream>
-#include <TriangleBuffer.h>
-#include <Cube.h>
+//#include <TriangleBuffer.h>
+//#include <Cube.h>
+#include <DynamicMesh.h>
 
 void Draw();
 
@@ -14,8 +15,10 @@ namespace FOGrP
 	{
         Window mWindow;
 
-        TriangleBuffer mTris;
-        Cube mCube;
+        //TriangleBuffer mTris;
+        //Cube mCube;
+        DynamicMesh mesh;
+
 
     public:
 

@@ -3,34 +3,34 @@
 /*-----------------------------------------------------------------------------
      *  SOME SHADER CODE
      *-----------------------------------------------------------------------------*/
-const char* vert = GLSL(120,
-
-attribute vec4 position;
-attribute vec4 color;
-
-varying vec4 dstColor;             //<-- new uniform matrix
-
-
-uniform mat4 model;
-uniform mat4 view;                                      //<-- 4x4 Transformation Matrices
-uniform mat4 projection;
-
-void main() {
-    dstColor = color;
-    gl_Position = projection * view * model * position;   //<-- Apply transformation 
-}
-
-);
-
-const char* frag = GLSL(120,
-
-    varying vec4 dstColor;
-
-void main() {
-    gl_FragColor = dstColor;
-}
-
-);
+//const char* vert = GLSL(120,
+//
+//attribute vec4 position;
+//attribute vec4 color;
+//
+//varying vec4 dstColor;             //<-- new uniform matrix
+//
+//
+//uniform mat4 model;
+//uniform mat4 view;                                      //<-- 4x4 Transformation Matrices
+//uniform mat4 projection;
+//
+//void main() {
+//    dstColor = color;
+//    gl_Position = projection * view * model * position;   //<-- Apply transformation 
+//}
+//
+//);
+//
+//const char* frag = GLSL(120,
+//
+//    varying vec4 dstColor;
+//
+//void main() {
+//    gl_FragColor = dstColor;
+//}
+//
+//);
 
 namespace FOGrP
 {
@@ -41,6 +41,29 @@ namespace FOGrP
     void FOGrP::Cube::Init(Window* window)
     {
         mWindow = window;
+
+        /*-----------------------------------------------------------------------------
+         *  CREATE THE SHADER
+         *-----------------------------------------------------------------------------*/
+
+        //mShader = new Shader(vert, frag);
+
+        // With Shader bound, get attribute and uniform locations:
+
+        // Get attribute locations
+        positionID = glGetAttribLocation(mShader->Id(), "position");
+        colorID = glGetAttribLocation(mShader->Id(), "color");
+
+        // Get uniform locations
+        modelID = glGetUniformLocation(mShader->Id(), "model");
+        viewID = glGetUniformLocation(mShader->Id(), "view");
+        projectionID = glGetUniformLocation(mShader->Id(), "projection");
+
+        BindVertexData();
+    }
+
+    void FOGrP::Cube::BindVertexData()
+    {
         Vertex cube[] = {
                             {glm::vec3(1, -1,  1), glm::vec4(1,0,0,1)},
                             {glm::vec3(1,  1,  1), glm::vec4(0,1,0,1)},
@@ -72,25 +95,6 @@ namespace FOGrP
                           4,5,1,0, //right
                           1,5,6,2, //top
                           4,0,3,7 }; //bottom
-
-        /*-----------------------------------------------------------------------------
-         *  CREATE THE SHADER
-         *-----------------------------------------------------------------------------*/
-
-        mShader = new Shader(vert, frag);
-
-        // With Shader bound, get attribute and uniform locations:
-
-        // Get attribute locations
-        positionID = glGetAttribLocation(mShader->Id(), "position");
-        colorID = glGetAttribLocation(mShader->Id(), "color");
-
-        // Get uniform locations
-        modelID = glGetUniformLocation(mShader->Id(), "model");
-        viewID = glGetUniformLocation(mShader->Id(), "view");
-        projectionID = glGetUniformLocation(mShader->Id(), "projection");
-
-
         /*-----------------------------------------------------------------------------
          *  CREATE THE VERTEX ARRAY OBJECT
          *-----------------------------------------------------------------------------*/
@@ -129,10 +133,6 @@ namespace FOGrP
         BINDVERTEXARRAY(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    }
-
-    void FOGrP::Cube::BindVertexData()
-    {
     }
 
     void FOGrP::Cube::Draw()

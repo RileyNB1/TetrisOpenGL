@@ -43,7 +43,7 @@ namespace FOGrP
     void FOGrP::TriangleBuffer::Init(Window* window)
     {
         mWindow = window;
-        Vertex v1, v2, v3;
+        TrisVertex v1, v2, v3;
 
         v1.position = glm::vec2(-1, 0);
         v1.color = glm::vec4(1, 0, 0, 1);
@@ -82,6 +82,8 @@ namespace FOGrP
 
          //1. CREATE SHADER PROGRAM
         mShader = new Shader(vert, frag);
+
+        BindVertexData();
     }
 
     void TriangleBuffer::BindVertexData()
@@ -121,8 +123,8 @@ namespace FOGrP
         glEnableVertexAttribArray(colorID);
 
         // Tell OpenGL how to handle the buffer of data that is already on the GPU
-        glVertexAttribPointer(positionID, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-        glVertexAttribPointer(colorID, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)sizeof(glm::vec2));
+        glVertexAttribPointer(positionID, 2, GL_FLOAT, GL_FALSE, sizeof(TrisVertex), 0);
+        glVertexAttribPointer(colorID, 4, GL_FLOAT, GL_FALSE, sizeof(TrisVertex), (void*)sizeof(glm::vec2));
 
         BINDVERTEXARRAY(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
