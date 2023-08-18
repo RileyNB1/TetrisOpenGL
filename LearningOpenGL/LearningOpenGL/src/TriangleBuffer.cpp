@@ -55,9 +55,9 @@ namespace FOGrP
         v3.color = glm::vec4(0, 0, 1, 1);
 
         //Specify the 3 VERTICES of A Triangle
-        mTris.push_back(v1);
-        mTris.push_back(v2);
-        mTris.push_back(v3);
+        mTris[0] = v1;
+        mTris[1] = v2;
+        mTris[2] = v3;
 
         /*-----------------------------------------------------------------------------
         *  View Transform: Eye Position        Target             Up Direction
@@ -81,18 +81,18 @@ namespace FOGrP
          *-----------------------------------------------------------------------------*/
 
          //1. CREATE SHADER PROGRAM
-        mTrisShader = new Shader(vert, frag);
+        mShader = new Shader(vert, frag);
     }
 
     void TriangleBuffer::BindVertexData()
     {
-        positionID = glGetAttribLocation(mTrisShader->Id(), "position");
-        colorID = glGetAttribLocation(mTrisShader->Id(), "color");
+        positionID = glGetAttribLocation(mShader->Id(), "position");
+        colorID = glGetAttribLocation(mShader->Id(), "color");
 
         // Get uniform locations
-        modelID = glGetUniformLocation(mTrisShader->Id(), "model");
-        viewID = glGetUniformLocation(mTrisShader->Id(), "view");
-        projectionID = glGetUniformLocation(mTrisShader->Id(), "projection");
+        modelID = glGetUniformLocation(mShader->Id(), "model");
+        viewID = glGetUniformLocation(mShader->Id(), "view");
+        projectionID = glGetUniformLocation(mShader->Id(), "projection");
 
         //| x | y | r | g | b | a| |x | y | r | g | b | a| |x | y | r | g | b | a |
             /*-----------------------------------------------------------------------------
@@ -109,7 +109,7 @@ namespace FOGrP
         // Bind Array Buffer 
         glBindBuffer(GL_ARRAY_BUFFER, bufferID);
         // Send data over buffer to GPU
-        glBufferData(GL_ARRAY_BUFFER, mTris.size() * sizeof(Vertex), &(mTris[0]), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, 3 * sizeof(Vertex), &(mTris[0]), GL_STATIC_DRAW);
 
 
         /*-----------------------------------------------------------------------------
@@ -125,10 +125,6 @@ namespace FOGrP
         glVertexAttribPointer(colorID, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)sizeof(glm::vec2));
 
         BINDVERTEXARRAY(0);
-
-        /// <summary>
-        /// Not in colored tris buffer
-        /// </summary>
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
@@ -137,7 +133,7 @@ namespace FOGrP
         static float time = 0.0;
         time += .01;
         //Bind Shader and Vertex Array Object
-        glUseProgram(mTrisShader->Id());
+        glUseProgram(mShader->Id());
 
         BINDVERTEXARRAY(arrayID);
 
@@ -153,7 +149,7 @@ namespace FOGrP
             /*-----------------------------------------------------------------------------
              *  Scale, then Rotate, then Translate = translate * rotate * scale
              *-----------------------------------------------------------------------------*/
-            glm::mat4 model = translate * rotate * scale;
+            model = translate * rotate * scale;
 
             glUniformMatrix4fv(modelID, 1, GL_FALSE, glm::value_ptr(model));
             glDrawArrays(GL_TRIANGLES, 0, 3);
@@ -166,6 +162,6 @@ namespace FOGrP
 
     TriangleBuffer::~TriangleBuffer()
     {
-        delete mTrisShader;
+        delete mShader;
     }
 }

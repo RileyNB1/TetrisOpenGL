@@ -1,24 +1,22 @@
 #pragma once
 
+
 #include <Macros.h>
 
-#include <vector>
 #include <Window.h>
 #include <Shader.h>
 
 namespace FOGrP
 {
-    class TriangleBuffer
-    {
+	class Cube
+	{
         Vertex mTris[3];
-        Shader *mShader;
+        Shader* mShader;
 
         //ID of Vertex Attribute
-        GLuint positionID, colorID;
+        GLuint positionID, colorID, normalID;
         //A buffer ID
-        GLuint bufferID;
-        //A Vertex Array ID
-        GLuint arrayID;
+        GLuint bufferID, elementID, arrayID;
         //ID of Uniform
         GLuint modelID, viewID, projectionID;
 
@@ -28,7 +26,7 @@ namespace FOGrP
 
     public:
 
-        TriangleBuffer();
+        Cube();
 
         void Init(Window* window);
 
@@ -36,7 +34,7 @@ namespace FOGrP
 
         void Draw();
 
-        ~TriangleBuffer();
-    };
+        ~Cube();
+	};
 }
 

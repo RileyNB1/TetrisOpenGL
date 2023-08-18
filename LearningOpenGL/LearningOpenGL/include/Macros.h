@@ -2,6 +2,13 @@
 
 #include <GL_Lib.h>
 
+class Vertex
+{
+public:
+	glm::vec2 position;
+	glm::vec4 color;
+};
+
 #ifndef PI
 #define PI (float)3.14159265359
 #endif

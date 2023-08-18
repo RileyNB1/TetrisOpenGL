@@ -4,6 +4,7 @@
 #include <Window.h>
 #include <iostream>
 #include <TriangleBuffer.h>
+#include <Cube.h>
 
 void Draw();
 
@@ -14,6 +15,7 @@ namespace FOGrP
         Window mWindow;
 
         TriangleBuffer mTris;
+        Cube mCube;
 
     public:
 

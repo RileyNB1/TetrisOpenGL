@@ -74,6 +74,6 @@ namespace FOGrP
 
 	float Window::AspectRatio() const
 	{
-		return mWidth / mHeight;
+		return (float)mWidth / mHeight;
 	}
 }
