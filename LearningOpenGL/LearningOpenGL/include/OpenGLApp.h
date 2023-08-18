@@ -5,7 +5,8 @@
 #include <iostream>
 //#include <TriangleBuffer.h>
 //#include <Cube.h>
-#include <DynamicMesh.h>
+//#include <DynamicMesh.h>
+#include <Texture.h>
 
 void Draw();
 
@@ -17,7 +18,8 @@ namespace FOGrP
 
         //TriangleBuffer mTris;
         //Cube mCube;
-        DynamicMesh mesh;
+        //DynamicMesh mesh;
+        Texture mTex;
 
 
     public:

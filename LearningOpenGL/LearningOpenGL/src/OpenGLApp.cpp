@@ -55,7 +55,9 @@ namespace FOGrP
 
         //mCube.Init(&mWindow);
 
-        mesh.Init(&mWindow);
+        //mesh.Init(&mWindow);
+
+        mTex.Init(&mWindow);
     }
 
     Window& OpenGLApp::Window()
@@ -91,7 +93,9 @@ namespace FOGrP
         //mTris.Draw();
         //mCube.Draw();
 
-        mesh.Draw();
+        //mesh.Draw();
+
+        mTex.Draw();
     }
 
     void OpenGLApp::OnMouseMove(int x, int y)
