@@ -1,4 +1,67 @@
-#include "Shader.h"
+#pragma once
+
+#include <Shader.h>
+#include <Macros.h>
+
+#ifndef SHADER_CODE
+
+#define SHADERCODE
+
+
+
+/*-----------------------------------------------------------------------------
+ *  SHADER CODE
+ *-----------------------------------------------------------------------------*/
+const char* vert = GLSL(120,
+
+    attribute vec4 position;
+attribute vec3 normal;
+attribute vec4 color;
+attribute vec2 textureCoordinate;
+
+uniform mat4 projection;
+uniform mat4 view;
+uniform mat4 model;
+uniform mat3 normalMatrix; //<-- This will be used to calculate our normals in eye space
+
+varying vec2 texCoord;
+varying float diffuse;
+
+//the simplest function to calculate lighting 
+float doColor() {
+    vec3 norm = normalize(normalMatrix * normalize(normal));
+    vec3 light = normalize(vec3(1.0, 1.0, 1.0));
+    diffuse = max(dot(norm, light), 0.0);
+
+    return diffuse;
+}
+
+void main(void) {
+    diffuse = doColor();
+    texCoord = textureCoordinate;
+    gl_Position = projection * view * model * position;
+}
+
+);
+
+
+
+const char* frag = GLSL(120,
+
+    uniform sampler2D sampler;
+
+varying vec2 texCoord;
+varying float diffuse;
+
+void main(void) {
+    gl_FragColor = vec4(texture2D(sampler, texCoord).rgb * diffuse, 1.0);
+}
+
+);
+
+
+#endif // !SHADER_CODE
+
 
 GLuint FOGrP::Shader::Id() const
 {
@@ -6,10 +69,6 @@ GLuint FOGrP::Shader::Id() const
 }
 
 FOGrP::Shader::Shader()
-{
-}
-
-FOGrP::Shader::Shader(const char* vert, const char* frag)
 {
     /*-----------------------------------------------------------------------------
     *  CREATE THE SHADER
@@ -54,6 +113,11 @@ void FOGrP::Shader::Bind()
 void FOGrP::Shader::Unbind()
 {
     glUseProgram(0);
+}
+
+GLuint FOGrP::Shader::GetUniformLocation(const char* locationName)
+{
+    return glGetUniformLocation(sID, locationName);
 }
 
 void FOGrP::Shader::CompilerCheck(GLuint ID)

@@ -7,6 +7,12 @@
 
 namespace FOGrP
 {
+    struct Vertex
+    {
+    public:
+        glm::vec3 position;
+        glm::vec4 color;
+    };
 	class DynamicMesh
 	{
         Vertex mTris[3];

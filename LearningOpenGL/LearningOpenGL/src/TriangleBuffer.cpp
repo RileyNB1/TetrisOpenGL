@@ -1,39 +1,9 @@
+#pragma once
+
 #include <TriangleBuffer.h>
 
 namespace FOGrP
 {
-
-    /*-----------------------------------------------------------------------------
-     *  SOME SHADER CODE
-     *-----------------------------------------------------------------------------*/
-    const char* vert = GLSL(120,
-
-    attribute vec4 position;
-    attribute vec4 color;
-
-    varying vec4 dstColor;             //<-- new uniform matrix
-
-
-    uniform mat4 model;
-    uniform mat4 view;                                      //<-- 4x4 Transformation Matrices
-    uniform mat4 projection;
-
-    void main() {
-        dstColor = color;
-        gl_Position = projection * view * model * position;   //<-- Apply transformation 
-    }
-
-    );
-
-    const char* frag = GLSL(120,
-
-    varying vec4 dstColor;
-
-    void main() {
-        gl_FragColor = dstColor;
-    }
-
-    );
 
     TriangleBuffer::TriangleBuffer()
     {
@@ -81,7 +51,7 @@ namespace FOGrP
          *-----------------------------------------------------------------------------*/
 
          //1. CREATE SHADER PROGRAM
-        mShader = new Shader(vert, frag);
+        //mShader = new Shader(vert, frag);
 
         BindVertexData();
     }
@@ -111,7 +81,7 @@ namespace FOGrP
         // Bind Array Buffer 
         glBindBuffer(GL_ARRAY_BUFFER, bufferID);
         // Send data over buffer to GPU
-        glBufferData(GL_ARRAY_BUFFER, 3 * sizeof(Vertex), &(mTris[0]), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, 3 * sizeof(TrisVertex), &(mTris[0]), GL_STATIC_DRAW);
 
 
         /*-----------------------------------------------------------------------------

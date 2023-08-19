@@ -1,3 +1,5 @@
+#pragma once
+
 #include <OpenGLApp.h>
 
 namespace FOGrP
@@ -53,11 +55,11 @@ namespace FOGrP
 
         //mTris.Init(&mWindow);
 
-        //mCube.Init(&mWindow);
+        mCube.Init(&mWindow);
 
         //mesh.Init(&mWindow);
 
-        mTex.Init(&mWindow);
+        //mTex.Init(&mWindow);
     }
 
     Window& OpenGLApp::Window()
@@ -91,11 +93,11 @@ namespace FOGrP
     void OpenGLApp::OnDraw()
     {
         //mTris.Draw();
-        //mCube.Draw();
+        mCube.Draw();
 
         //mesh.Draw();
 
-        mTex.Draw();
+        //mTex.Draw();
     }
 
     void OpenGLApp::OnMouseMove(int x, int y)

@@ -15,11 +15,11 @@ namespace FOGrP
 
         Shader();
 
-        Shader(const char* vert, const char* frag);
-
         void Bind();
 
         void Unbind();
+
+        GLuint GetUniformLocation(const char* locationName);
 
         /*-----------------------------------------------------------------------------
          *  FUNCION TO CHECK FOR SHADER COMPILER ERRORS

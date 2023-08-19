@@ -1,30 +1,6 @@
+#pragma once
+
 #include <Texture.h>
-
-const char* vert = GLSL(120,
-    attribute vec4 position;
-    attribute vec2 textureCoordinate;              //<-- Texture Coordinate Attribute
-
-    varying vec2 texCoord;                         //<-- To be passed to fragment shader
-
-void main(void) {
-    texCoord = textureCoordinate;
-
-    gl_Position = position;
-}
-
-);
-
-const char* frag = GLSL(120,
-
-    uniform sampler2D texture;                       //<-- The texture itself
-
-    varying vec2 texCoord;                           //<-- coordinate passed in from vertex shader
-
-void main(void) {
-    gl_FragColor = texture2D(texture, texCoord); //<-- look up the coordinate's value
-}
-
-);
 
 namespace FOGrP
 {
@@ -45,7 +21,7 @@ namespace FOGrP
         /*-----------------------------------------------------------------------------
          *  Create Shader
          *-----------------------------------------------------------------------------*/
-        mShader = new Shader(vert, frag);
+        //mShader = new Shader(vert, frag);
 
         /*-----------------------------------------------------------------------------
          *  Get Attribute Locations
@@ -58,7 +34,7 @@ namespace FOGrP
 
     void FOGrP::Texture::BindVertexData()
     {
-        Bitmap img = Bitmap("resources/flower.bmp");
+        Bitmap img = Bitmap("flower.bmp");
         tw = img.width;
         th = img.height;
         /*-----------------------------------------------------------------------------

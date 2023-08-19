@@ -2,12 +2,12 @@
 
 #include <GL_Lib.h>
 
-class Vertex
-{
-public:
-	glm::vec3 position;
-	glm::vec4 color;
-};
+//struct Vertex
+//{
+//public:
+//	glm::vec3 position;
+//	glm::vec4 color;
+//};
 
 #ifndef PI
 #define PI (float)3.14159265359
@@ -35,3 +35,5 @@ public:
 #define BINDVERTEXARRAY(id) if(GLEW_APPLE_vertex_array_object)glBindVertexArrayAPPLE(id);\
 	else if (GLEW_ARB_vertex_array_object) glBindVertexArray(id)
 #endif
+
+
