@@ -23,6 +23,5 @@ namespace FOGrP
 		static void OnMouseDown(GLFWwindow* window, int button, int action, int mods) {
 			((APPLICATION*)(app))->OnMouseDown(button, action);
 		}
-
 	};
 }

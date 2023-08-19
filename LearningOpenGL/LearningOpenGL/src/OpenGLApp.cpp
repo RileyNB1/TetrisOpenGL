@@ -4,6 +4,8 @@
 
 namespace FOGrP
 {
+    MVP OpenGLApp::mvp;
+
     OpenGLApp::OpenGLApp(int width, int height)
     {
         if (!glfwInit())
@@ -52,14 +54,11 @@ namespace FOGrP
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         glLineWidth(3);
+    }
 
-        //mTris.Init(&mWindow);
-
-        mCube.Init(&mWindow);
-
-        //mesh.Init(&mWindow);
-
-        //mTex.Init(&mWindow);
+    MVP& OpenGLApp::MVP()
+    {
+        return mvp;
     }
 
     Window& OpenGLApp::Window()
@@ -74,6 +73,21 @@ namespace FOGrP
 
     void OpenGLApp::Start()
     {
+        keyCode = -1;
+        eyePos = glm::vec3(0, 0, 5);
+        forwardDir = glm::vec3(0, 0, -1); 
+        
+        mvp.view = glm::lookAt(eyePos, eyePos + forwardDir, glm::vec3(0, 1, 0));
+        mvp.proj = glm::perspective(PI / 3.0f, mWindow.AspectRatio(), 0.1f, -10.0f);
+
+        //mTris.Init(&mWindow);
+
+        mCube.Init(&mWindow, MVP());
+
+        //mesh.Init(&mWindow);
+
+        //mTex.Init(&mWindow);
+
         while (!mWindow.ShouldClose())
         {
             mWindow.SetViewport();
@@ -81,7 +95,7 @@ namespace FOGrP
             glClearColor(0, 0, 0, 1);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
+            OnInput();
             OnDraw();
 
             mWindow.SwapBuffers();
@@ -100,6 +114,34 @@ namespace FOGrP
         //mTex.Draw();
     }
 
+    void OpenGLApp::OnInput()
+    {/*-----------------------------------------------------------------------------
+     *  Every frame, check for keyboard input
+     *-----------------------------------------------------------------------------*/
+        if (keyCode != -1) {
+            if (keyCode == GLFW_KEY_UP) eyePos += forwardDir * .01f;
+            if (keyCode == GLFW_KEY_DOWN) eyePos -= forwardDir * .01f;
+            if (keyCode == GLFW_KEY_LEFT) {
+                glm::quat q = glm::angleAxis(.01f, glm::vec3(0, 1, 0));
+                forwardDir = q * forwardDir;
+            }
+            if (keyCode == GLFW_KEY_RIGHT) {
+                glm::quat q = glm::angleAxis(-.01f, glm::vec3(0, 1, 0));
+                forwardDir = q * forwardDir;
+            }
+        }
+
+        /*-----------------------------------------------------------------------------
+         *  Set up view and projection matrices
+         *-----------------------------------------------------------------------------*/
+        mvp.view = glm::lookAt(eyePos, eyePos + forwardDir, glm::vec3(0, 1, 0));
+        mvp.proj = glm::perspective(PI / 3.0f, mWindow.AspectRatio(), 0.1f, -10.0f);
+
+        glUniformMatrix4fv(mvp.viewID, 1, GL_FALSE, glm::value_ptr(mvp.view));
+        glUniformMatrix4fv(mvp.projectionID, 1, GL_FALSE, glm::value_ptr(mvp.proj));
+
+    }
+
     void OpenGLApp::OnMouseMove(int x, int y)
     {
     }
@@ -110,5 +152,12 @@ namespace FOGrP
 
     void OpenGLApp::OnKeyDown(int key, int action)
     {
+        if (action == GLFW_PRESS)
+            keyCode = key;
+        std::cout << "key pressed" << std::endl;
+        if (action == GLFW_RELEASE) {
+            keyCode = -1;
+            std::cout << "key released" << std::endl;
+        }
     }
 }

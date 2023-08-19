@@ -32,12 +32,10 @@ namespace FOGrP
         GLuint positionID, colorID, normalID, textureCoordinateID;
         //A buffer ID
         GLuint bufferID, elementID, arrayID;
-        //ID of Uniform
-        GLuint modelID, viewID, projectionID, normalMatrixID;
 
         Window* mWindow;
 
-        glm::mat4 model, view, proj, normalMatrix;
+        MVP mvp;
 
         //Texture ID
         GLuint tID;
@@ -45,7 +43,7 @@ namespace FOGrP
 
         Cube();
 
-        void Init(Window* window);
+        void Init(Window* window, MVP& _mvp);
 
         void BindVertexData();
 

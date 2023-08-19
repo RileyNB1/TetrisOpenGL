@@ -1,6 +1,7 @@
 #pragma once
 
 #include <GL_Lib.h>
+#include <Shader.h>
 
 //struct Vertex
 //{
@@ -8,6 +9,29 @@
 //	glm::vec3 position;
 //	glm::vec4 color;
 //};
+
+struct MVP
+{
+	//ID of Uniform
+	GLuint modelID, viewID, projectionID, normalMatrixID;
+	glm::mat4 model, view, proj;
+
+	glm::mat4 normalMatrix()
+	{
+		return	glm::transpose(glm::inverse(glm::mat3(view * model)));
+	}
+
+	void updateUniformLocId(FOGrP::Shader* shader)
+	{
+		// Get uniform locations
+		modelID = shader->GetUniformLocation("model");
+		viewID = shader->GetUniformLocation("view");
+		projectionID = shader->GetUniformLocation("projection");
+
+		//****************/
+		normalMatrixID = shader->GetUniformLocation("normalMatrix");
+	}
+};
 
 #ifndef PI
 #define PI (float)3.14159265359

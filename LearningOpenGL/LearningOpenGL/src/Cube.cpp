@@ -9,10 +9,10 @@ namespace FOGrP
     {
     }
 
-    void FOGrP::Cube::Init(Window* window)
+    void FOGrP::Cube::Init(Window* window, MVP& _mvp)
     {
         mWindow = window;
-
+        mvp = _mvp;
         /*-----------------------------------------------------------------------------
          *  CREATE THE SHADER
          *-----------------------------------------------------------------------------*/
@@ -26,13 +26,7 @@ namespace FOGrP
         colorID = mShader->GetUniformLocation("color");
         textureCoordinateID = mShader->GetUniformLocation("textureCoordinate");
 
-        // Get uniform locations
-        modelID = mShader->GetUniformLocation("model");
-        viewID = mShader->GetUniformLocation("view");
-        projectionID = mShader->GetUniformLocation("projection");
-
-        //****************/
-        normalMatrixID = mShader->GetUniformLocation("normalMatrix");
+        mvp.updateUniformLocId(mShader);
 
         BindVertexData();
     }
@@ -167,19 +161,13 @@ namespace FOGrP
         glUseProgram(mShader->Id());
         glBindTexture(GL_TEXTURE_2D, tID);
         BINDVERTEXARRAY(arrayID);
-
-        glm::mat4 view = glm::lookAt(glm::vec3(0, 0, 5), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
-       
-        glm::mat4 proj = glm::perspective(3.14f / 3.0f, mWindow->AspectRatio(), 0.1f, -10.0f);
         
-        glm::mat4 model = glm::rotate(glm::mat4(1), time, glm::vec3(0, 1, 0));
-        
-        glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(view * model)));
+        mvp.model = glm::rotate(glm::mat4(1), time, glm::vec3(0, 1, 0));
 
-        glUniformMatrix4fv(viewID, 1, GL_FALSE, glm::value_ptr(view));
-        glUniformMatrix4fv(projectionID, 1, GL_FALSE, glm::value_ptr(proj));
-        glUniformMatrix4fv(modelID, 1, GL_FALSE, glm::value_ptr(model));
-        glUniformMatrix3fv(normalMatrixID, 1, GL_FALSE, glm::value_ptr(normalMatrix));
+        glUniformMatrix4fv(mvp.viewID, 1, GL_FALSE, glm::value_ptr(mvp.view));
+        glUniformMatrix4fv(mvp.projectionID, 1, GL_FALSE, glm::value_ptr(mvp.proj));
+        glUniformMatrix4fv(mvp.modelID, 1, GL_FALSE, glm::value_ptr(mvp.model));
+        glUniformMatrix3fv(mvp.normalMatrixID, 1, GL_FALSE, glm::value_ptr(mvp.normalMatrix()));
 
         glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, (void*)0);
 

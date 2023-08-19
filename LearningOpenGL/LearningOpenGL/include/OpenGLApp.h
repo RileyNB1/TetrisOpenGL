@@ -21,10 +21,20 @@ namespace FOGrP
         //DynamicMesh mesh;
         //Texture mTex;
 
+        int keyCode;
+        glm::vec3 eyePos;
+        glm::vec3 forwardDir;
+
+        /// <summary>
+        /// Model View Projection matrices
+        /// </summary>
+        static MVP mvp;
 
     public:
 
         OpenGLApp(int width = 640, int height = 480);
+
+        static MVP& MVP();
 
         Window& Window();
 
@@ -33,6 +43,8 @@ namespace FOGrP
         void Start();
 
         virtual void OnDraw();
+
+        virtual void OnInput();
 
         virtual void OnMouseMove(int x, int y);
 
