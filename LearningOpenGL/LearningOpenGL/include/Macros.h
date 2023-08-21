@@ -15,6 +15,9 @@ struct MVP
 	//ID of Uniform
 	GLuint modelID, viewID, projectionID, normalMatrixID;
 	glm::mat4 model, view, proj;
+	glm::vec3 eyePos;
+	glm::vec3 forwardDir;
+	int keyCode = -1;
 
 	glm::mat4 normalMatrix()
 	{

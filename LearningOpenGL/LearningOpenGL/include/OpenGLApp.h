@@ -8,11 +8,9 @@
 //#include <DynamicMesh.h>
 //#include <Texture.h>
 
-void Draw();
-
 namespace FOGrP
 {
-	class OpenGLApp
+	class OpenGLApp// : public MouseListener
 	{
         Window mWindow;
 
@@ -20,10 +18,6 @@ namespace FOGrP
         Cube mCube;
         //DynamicMesh mesh;
         //Texture mTex;
-
-        int keyCode;
-        glm::vec3 eyePos;
-        glm::vec3 forwardDir;
 
         /// <summary>
         /// Model View Projection matrices
@@ -46,10 +40,10 @@ namespace FOGrP
 
         virtual void OnInput();
 
-        virtual void OnMouseMove(int x, int y);
+        static void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mods);
 
-        virtual void OnMouseDown(int button, int action);
+        static void OnMouseMove(GLFWwindow* window, double x, double y);
 
-        virtual void OnKeyDown(int key, int action);
+        static void OnMouseDown(GLFWwindow* window, int button, int action, int mods);
 	};
 }

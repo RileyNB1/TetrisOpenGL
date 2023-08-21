@@ -167,6 +167,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\BaseApp.cpp" />
     <ClCompile Include="include\Bitmap.cpp" />
     <ClCompile Include="src\DynamicMesh.cpp" />
     <ClCompile Include="src\Cube.cpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\BaseApp.h" />
     <ClInclude Include="include\DynamicMesh.h" />
     <ClInclude Include="include\Cube.h" />
     <ClInclude Include="include\GL_Lib.h" />

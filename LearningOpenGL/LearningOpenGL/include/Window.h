@@ -1,13 +1,12 @@
 #pragma once
 
-#include <MouseListener.h>
+#include <Macros.h>
 
 namespace FOGrP
 {
 	class Window
 	{
         GLFWwindow* window;
-        //MouseListener interface;
 
         int mWidth, mHeight;
 
@@ -16,13 +15,13 @@ namespace FOGrP
         Window();
 
         //Create a Window Context
-        //template<class APPLICATION>
-        void Create(/*APPLICATION* app, */int w, int h, const char* name = "demo");
+        void Create(int w, int h, const char* name = "demo");
 
         int Width() const;
         int Height() const;
         float AspectRatio() const;
 
+        GLFWwindow* GetGLFWWindow();
 
         //Get the Current framebuffer Size in pixels and Set the Viewport to it    
         void SetViewport();

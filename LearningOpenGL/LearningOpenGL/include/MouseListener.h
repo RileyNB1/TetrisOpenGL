@@ -7,21 +7,12 @@ namespace FOGrP
 	*-----------------------------------------------------------------------------*/
 	class MouseListener
 	{
-		static void* app; // <-- an unknown application to be defined later
+	public:
 
-		template<class APPLICATION>
-		static void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mods) {
-			((APPLICATION*)(app))->OnKeyDown(key, action);
-		}
+		virtual void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mods) = 0;
 
-		template<class APPLICATION>
-		static void OnMouseMove(GLFWwindow* window, double x, double y) {
-			((APPLICATION*)(app))->OnMouseMove(x, y);
-		}
+		virtual void OnMouseMove(GLFWwindow* window, double x, double y) = 0;
 
-		template<class APPLICATION>
-		static void OnMouseDown(GLFWwindow* window, int button, int action, int mods) {
-			((APPLICATION*)(app))->OnMouseDown(button, action);
-		}
+		virtual void OnMouseDown(GLFWwindow* window, int button, int action, int mods) = 0;
 	};
 }

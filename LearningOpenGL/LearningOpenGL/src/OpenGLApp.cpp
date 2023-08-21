@@ -13,7 +13,14 @@ namespace FOGrP
             exit(EXIT_FAILURE);
         }
 
-        mWindow.Create(/*this, */width, height, "GLFW");
+        mWindow.Create( width, height, "GLFW");
+
+        GLFWwindow* glWin = mWindow.GetGLFWWindow();
+
+
+        glfwSetKeyCallback(glWin, OnKeyDown);
+        glfwSetCursorPosCallback(glWin, OnMouseMove);
+        glfwSetMouseButtonCallback(glWin, OnMouseDown);
 
         // Init Glew **************************
         glewExperimental = true;
@@ -73,11 +80,11 @@ namespace FOGrP
 
     void OpenGLApp::Start()
     {
-        keyCode = -1;
-        eyePos = glm::vec3(0, 0, 5);
-        forwardDir = glm::vec3(0, 0, -1); 
+        mvp.keyCode= -1;
+        mvp.eyePos = glm::vec3(0, 0, 5);
+        mvp.forwardDir = glm::vec3(0, 0, -1);
         
-        mvp.view = glm::lookAt(eyePos, eyePos + forwardDir, glm::vec3(0, 1, 0));
+        mvp.view = glm::lookAt(mvp.eyePos, mvp.eyePos + mvp.forwardDir, glm::vec3(0, 1, 0));
         mvp.proj = glm::perspective(PI / 3.0f, mWindow.AspectRatio(), 0.1f, -10.0f);
 
         //mTris.Init(&mWindow);
@@ -115,26 +122,28 @@ namespace FOGrP
     }
 
     void OpenGLApp::OnInput()
-    {/*-----------------------------------------------------------------------------
-     *  Every frame, check for keyboard input
-     *-----------------------------------------------------------------------------*/
-        if (keyCode != -1) {
-            if (keyCode == GLFW_KEY_UP) eyePos += forwardDir * .01f;
-            if (keyCode == GLFW_KEY_DOWN) eyePos -= forwardDir * .01f;
-            if (keyCode == GLFW_KEY_LEFT) {
+    {
+        /*-----------------------------------------------------------------------------
+        *  Every frame, check for keyboard input
+        *-----------------------------------------------------------------------------*/
+        if (mvp.keyCode != -1) 
+        {
+            if (mvp.keyCode == GLFW_KEY_UP) mvp.eyePos += mvp.forwardDir * .01f;
+            if (mvp.keyCode == GLFW_KEY_DOWN) mvp.eyePos -= mvp.forwardDir * .01f;
+            if (mvp.keyCode == GLFW_KEY_LEFT) {
                 glm::quat q = glm::angleAxis(.01f, glm::vec3(0, 1, 0));
-                forwardDir = q * forwardDir;
+                mvp.forwardDir = q * mvp.forwardDir;
             }
-            if (keyCode == GLFW_KEY_RIGHT) {
+            if (mvp.keyCode == GLFW_KEY_RIGHT) {
                 glm::quat q = glm::angleAxis(-.01f, glm::vec3(0, 1, 0));
-                forwardDir = q * forwardDir;
+                mvp.forwardDir = q * mvp.forwardDir;
             }
         }
 
         /*-----------------------------------------------------------------------------
          *  Set up view and projection matrices
          *-----------------------------------------------------------------------------*/
-        mvp.view = glm::lookAt(eyePos, eyePos + forwardDir, glm::vec3(0, 1, 0));
+        mvp.view = glm::lookAt(mvp.eyePos, mvp.eyePos + mvp.forwardDir, glm::vec3(0, 1, 0));
         mvp.proj = glm::perspective(PI / 3.0f, mWindow.AspectRatio(), 0.1f, -10.0f);
 
         glUniformMatrix4fv(mvp.viewID, 1, GL_FALSE, glm::value_ptr(mvp.view));
@@ -142,22 +151,22 @@ namespace FOGrP
 
     }
 
-    void OpenGLApp::OnMouseMove(int x, int y)
-    {
-    }
-
-    void OpenGLApp::OnMouseDown(int button, int action)
-    {
-    }
-
-    void OpenGLApp::OnKeyDown(int key, int action)
+    void OpenGLApp::OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mods)
     {
         if (action == GLFW_PRESS)
-            keyCode = key;
+            mvp.keyCode = key;
         std::cout << "key pressed" << std::endl;
         if (action == GLFW_RELEASE) {
-            keyCode = -1;
+            mvp.keyCode = -1;
             std::cout << "key released" << std::endl;
         }
+    }
+
+    void OpenGLApp::OnMouseMove(GLFWwindow* window, double x, double y)
+    {
+    }
+
+    void OpenGLApp::OnMouseDown(GLFWwindow* window, int button, int action, int mods)
+    {
     }
 }
