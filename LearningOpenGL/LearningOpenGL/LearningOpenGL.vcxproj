@@ -185,6 +185,16 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
   <ItemGroup>
     <ClCompile Include="include\SDLProject\SDLTemplate.cpp" />
     <ClCompile Include="src\sdl_proj\AnimatedTexture.cpp" />
+    <ClCompile Include="src\sdl_proj\BezierPath.cpp" />
+    <ClCompile Include="src\sdl_proj\BoxCollider.cpp" />
+    <ClCompile Include="src\sdl_proj\CircleCollider.cpp" />
+    <ClCompile Include="src\sdl_proj\Collider.cpp" />
+    <ClCompile Include="src\sdl_proj\GameEntity.cpp" />
+    <ClCompile Include="src\sdl_proj\Graphics.cpp" />
+    <ClCompile Include="src\sdl_proj\managers\AssetManager.cpp" />
+    <ClCompile Include="src\sdl_proj\managers\AudioManager.cpp" />
+    <ClCompile Include="src\sdl_proj\managers\GameManager.cpp" />
+    <ClCompile Include="src\sdl_proj\managers\InputManager.cpp" />
     <ClCompile Include="src\sdl_proj\managers\PhysicsManager.cpp" />
     <ClCompile Include="src\sdl_proj\PhysEntity.cpp" />
     <ClCompile Include="src\Mesh.cpp" />
@@ -194,6 +204,8 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
     <ClCompile Include="src\Cube.cpp" />
     <ClCompile Include="include\MouseListener.h" />
     <ClCompile Include="LearningOpenGL.cpp" />
+    <ClCompile Include="src\sdl_proj\SDLTexture.cpp" />
+    <ClCompile Include="src\sdl_proj\Timer.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\OpenGLApp.cpp" />
     <ClCompile Include="src\Window.cpp" />

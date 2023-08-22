@@ -2,7 +2,6 @@
 
 namespace sdlFr
 {
-
     AnimatedTexture::AnimatedTexture(std::string filename,
         int x, int y, int w, int h,
         int frameCount, float animationSpeed,
