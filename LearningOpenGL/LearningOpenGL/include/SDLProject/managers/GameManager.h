@@ -8,11 +8,7 @@
 #include <managers/InputManager.h>
 #include <AnimatedTexture.h>
 #include <managers/AudioManager.h>
-#include <galaga/BackgroundStars.h>
-#include <galaga/ScreenManager.h>
 #include <managers/PhysicsManager.h>
-
-using namespace Galaga;
 
 namespace SDLFramework
 {
@@ -32,7 +28,6 @@ namespace SDLFramework
         AssetManager* mAssetManager;
         InputManager* mInputManager;
         AudioManager* mAudioManager; 
-        ScreenManager* mScreenManager;
         PhysicsManager* mPhysicsManager;
 
         SDL_Event mEvent;
@@ -106,8 +101,6 @@ namespace SDLFramework
     void GameManager::Update()
     {
         mInputManager->Update(); 
-        
-        mScreenManager->Update();
 
         if (mInputManager->KeyDown(SDL_SCANCODE_1)) 
         { 
@@ -124,8 +117,6 @@ namespace SDLFramework
     void GameManager::Render()
     {
         mGraphics->ClearBackBuffer();
-        
-        mScreenManager->Render();
         
         mGraphics->Render();
     }
@@ -144,7 +135,6 @@ namespace SDLFramework
         mInputManager = InputManager::Instance(); 
         mAudioManager = AudioManager::Instance();
         mAssetManager = AssetManager::Instance(); 
-        mScreenManager = ScreenManager::Instance();
         mPhysicsManager = PhysicsManager::Instance();
 
         // verify Graphics module is ready 
@@ -192,9 +182,6 @@ namespace SDLFramework
         
         AudioManager::Release();
         mAudioManager = nullptr; 
-        
-        ScreenManager::Release(); 
-        mScreenManager = nullptr;
 
         mPhysicsManager->Release();
         mPhysicsManager = nullptr;

@@ -48,7 +48,7 @@ namespace SDLFramework
         
         if (DEBUG_COLLIDERS) 
         { 
-            SetDebugTexture(new Texture("BoxCollider.png")); 
+            SetDebugTexture(new SDLTexture("BoxCollider.png"));
             mDebugTexture->Scale(size); 
         }
     } 

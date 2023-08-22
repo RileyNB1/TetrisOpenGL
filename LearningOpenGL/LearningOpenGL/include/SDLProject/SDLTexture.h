@@ -5,7 +5,7 @@
 
 namespace SDLFramework
 {
-    class Texture : public GameEntity
+    class SDLTexture : public GameEntity
     {
     private:
 
@@ -20,26 +20,26 @@ namespace SDLFramework
         bool mClipped;
 
     public:
-        Texture(std::string filename, bool managed = false);
+        SDLTexture(std::string filename, bool managed = false);
 
-        Texture(std::string filename,
+        SDLTexture(std::string filename,
             int x, int y, int w, int h,
             bool managed = false);
 
-        Texture(std::string text,
+        SDLTexture(std::string text,
             std::string fontPath,
             int size,
             SDL_Color color,
             bool managed = false);
 
-        ~Texture();
+        ~SDLTexture();
 
         Vector2 ScaledDimensions();
         void SetSourceRect(SDL_Rect* sourceRect);
         void Render() override;
     };
 
-    Texture::Texture(std::string filename, bool managed)
+    SDLTexture::SDLTexture(std::string filename, bool managed)
     {
         mGraphics = Graphics::Instance();
 
@@ -52,7 +52,7 @@ namespace SDLFramework
         mDestinationRect.h = mHeight;
     }
 
-    Texture::Texture(std::string filename,
+    SDLTexture::SDLTexture(std::string filename,
         int x, int y, int w, int h,
         bool managed)
     {
@@ -71,7 +71,7 @@ namespace SDLFramework
         mSourceRect.h = mHeight;
     }
 
-    Texture::Texture(std::string text,
+    SDLTexture::SDLTexture(std::string text,
         std::string fontPath,
         int size, SDL_Color color,
         bool managed)
@@ -89,14 +89,14 @@ namespace SDLFramework
         mDestinationRect.h = mHeight;
     }
 
-    Texture::~Texture()
+    SDLTexture::~SDLTexture()
     {
         AssetManager::Instance()->DestroyTexture(mTex);
         mTex = nullptr;
         mGraphics = nullptr;
     }
 
-    Vector2 Texture::ScaledDimensions()
+    Vector2 SDLTexture::ScaledDimensions()
     {
         Vector2 scaledDimensions = Scale();
         scaledDimensions.x *= mWidth;
@@ -105,12 +105,12 @@ namespace SDLFramework
         return scaledDimensions;
     }
 
-    void Texture::SetSourceRect(SDL_Rect* sourceRect)
+    void SDLTexture::SetSourceRect(SDL_Rect* sourceRect)
     {
         mSourceRect = *sourceRect;
     }
 
-    void Texture::Render()
+    void SDLTexture::Render()
     {
         Vector2 pos = Position(World);
         Vector2 scale = Scale(World);

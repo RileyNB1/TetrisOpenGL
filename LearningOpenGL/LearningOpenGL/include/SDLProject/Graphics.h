@@ -37,7 +37,8 @@ namespace SDLFramework
         static bool sInitialized;
 
         SDL_Window* mWindow;
-        SDL_Renderer* mRenderer;
+        SDL_Renderer* mRenderer; 
+        SDL_GLContext glContext;
 
         Graphics();
         ~Graphics();
@@ -74,6 +75,14 @@ namespace SDLFramework
     void Graphics::Render()
     {
         SDL_RenderPresent(mRenderer);
+
+        glClearDepth(1.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glEnableClientState(GL_COLOR_ARRAY); 
+        
+        SDL_GL_SwapWindow(mWindow); 
+        
+        glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
     }
 
     Graphics::Graphics() : mRenderer(nullptr)
@@ -108,7 +117,18 @@ namespace SDLFramework
             SDL_WINDOWPOS_UNDEFINED, // window y pos 
             SCREEN_WIDTH, // window width 
             SCREEN_HEIGHT, // window height 
-            SDL_WINDOW_SHOWN); // window flags 
+            SDL_WINDOW_OPENGL); // window flags 
+
+        glContext = SDL_GL_CreateContext(mWindow);
+        if (glContext == nullptr) {
+            std::cerr << "SDL_GL context could not be created! " << SDL_GetError()
+                << std::endl;
+        }
+        GLenum error = glewInit();
+        if (error != GLEW_OK) {
+            std::cerr << "Could not initialize glew! " << glewGetErrorString(error)
+                << std::endl;
+        }
 
         if (mWindow == nullptr)
         {
@@ -127,6 +147,8 @@ namespace SDLFramework
                 << SDL_GetError() << std::endl;
             return false;
         }
+        
+        SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
         return true;
     }

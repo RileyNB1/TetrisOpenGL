@@ -31,11 +31,11 @@ namespace SDLFramework
         {
             if (broadPhase) 
             { 
-                SetDebugTexture(new Texture("BroadPhaseCollider.png")); 
+                SetDebugTexture(new SDLTexture("BroadPhaseCollider.png"));
             }
             else 
             { 
-                SetDebugTexture(new Texture("CircleCollider.png")); 
+                SetDebugTexture(new SDLTexture("CircleCollider.png"));
             } 
             
             // circle collider file size is 50px 

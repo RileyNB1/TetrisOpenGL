@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Texture.h>
+#include <SDLTexture.h>
 
 namespace SDLFramework
 {
@@ -24,12 +24,12 @@ namespace SDLFramework
 
         static const bool DEBUG_COLLIDERS = true; 
         
-        Texture* mDebugTexture; 
+        SDLFramework::SDLTexture* mDebugTexture;
         
-        void SetDebugTexture(Texture* tex);
+        void SetDebugTexture(SDLTexture* tex);
     };
 
-    void Collider::SetDebugTexture(Texture* tex) 
+    void Collider::SetDebugTexture(SDLTexture* tex)
     { 
         delete mDebugTexture; 
         

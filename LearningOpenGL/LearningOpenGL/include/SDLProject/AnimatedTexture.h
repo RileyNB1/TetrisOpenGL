@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Texture.h> 
+#include <SDLTexture.h> 
 #include <Timer.h> 
 
 namespace SDLFramework 
@@ -8,7 +8,7 @@ namespace SDLFramework
     enum WrapMode { Once = 0, Loop = 1 };
     enum AnimDir { Horizontal = 0, Vertical = 1 };
 
-    class AnimatedTexture : public Texture 
+    class AnimatedTexture : public SDLTexture
     {
     protected: 
         Timer* mTimer; 
@@ -46,7 +46,7 @@ namespace SDLFramework
         int frameCount, float animationSpeed, 
         AnimDir animationDir, bool managed) : 
         
-        Texture(filename, x, y, w, h, managed) 
+        SDLTexture(filename, x, y, w, h, managed)
     {
         mTimer = Timer::Instance(); 
         mStartX = x; 

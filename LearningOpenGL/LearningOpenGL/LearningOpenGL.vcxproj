@@ -92,13 +92,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)glew210\include\;$(ProjectDir)\include\;$(SolutionDir)glfw338\include\;$(SolutionDir)glm\glm\;$(SolutionDir)SDL2\include\;$(SolutionDir)SDL2_ttf\include\;$(SolutionDir)SDL2_mixer\include\;$(SolutionDir)SDL2_image\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)glew210\include\;$(ProjectDir)\include\;$(SolutionDir)glfw338\include\;$(SolutionDir)glm\glm\;$(SolutionDir)SDL2\include\;$(SolutionDir)SDL2_ttf\include\;$(SolutionDir)SDL2_mixer\include\;$(SolutionDir)SDL2_image\include\;$(ProjectDir)\include\SDLProject\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)glfw338\lib-vc2022\;$(SolutionDir)glew210\lib\Release\x64;$(SolutionDir)SDL2\lib\$(PlatformTarget);$(SolutionDir)SDL2_ttf\lib\$(PlatformTarget);$(SolutionDir)SDL2_image\lib\$(PlatformTarget);$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;SDL2.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)resources\*" "$(OutDir)"
@@ -116,7 +116,7 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)glew210\include\;$(ProjectDir)\include\;$(SolutionDir)glfw338\include\;$(SolutionDir)glm\glm\;$(SolutionDir)SDL2\include\;$(SolutionDir)SDL2_ttf\include\;$(SolutionDir)SDL2_mixer\include\;$(SolutionDir)SDL2_image\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)glew210\include\;$(ProjectDir)\include\;$(SolutionDir)glfw338\include\;$(SolutionDir)glm\glm\;$(SolutionDir)SDL2\include\;$(SolutionDir)SDL2_ttf\include\;$(SolutionDir)SDL2_mixer\include\;$(SolutionDir)SDL2_image\include\;$(ProjectDir)\include\SDLProject\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -124,7 +124,7 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)glfw338\lib-vc2022\;$(SolutionDir)glew210\lib\Release\x64;$(SolutionDir)SDL2\lib\$(PlatformTarget);$(SolutionDir)SDL2_ttf\lib\$(PlatformTarget);$(SolutionDir)SDL2_image\lib\$(PlatformTarget);$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;SDL2.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)resources\*" "$(OutDir)"
@@ -140,13 +140,13 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)glew210\include\;$(ProjectDir)\include\;$(SolutionDir)glfw338\include\;$(SolutionDir)glm\glm\;$(SolutionDir)SDL2\include\;$(SolutionDir)SDL2_ttf\include\;$(SolutionDir)SDL2_mixer\include\;$(SolutionDir)SDL2_image\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)glew210\include\;$(ProjectDir)\include\;$(SolutionDir)glfw338\include\;$(SolutionDir)glm\glm\;$(SolutionDir)SDL2\include\;$(SolutionDir)SDL2_ttf\include\;$(SolutionDir)SDL2_mixer\include\;$(SolutionDir)SDL2_image\include\;$(ProjectDir)\include\SDLProject\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)glfw338\lib-vc2022\;$(SolutionDir)glew210\lib\Release\x64;$(SolutionDir)SDL2\lib\$(PlatformTarget);$(SolutionDir)SDL2_ttf\lib\$(PlatformTarget);$(SolutionDir)SDL2_image\lib\$(PlatformTarget);$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;SDL2.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)resources\*" "$(OutDir)"
@@ -164,7 +164,7 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)glew210\include\;$(ProjectDir)\include\;$(SolutionDir)glfw338\include\;$(SolutionDir)glm\glm\;$(SolutionDir)SDL2\include\;$(SolutionDir)SDL2_ttf\include\;$(SolutionDir)SDL2_mixer\include\;$(SolutionDir)SDL2_image\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)glew210\include\;$(ProjectDir)\include\;$(SolutionDir)glfw338\include\;$(SolutionDir)glm\glm\;$(SolutionDir)SDL2\include\;$(SolutionDir)SDL2_ttf\include\;$(SolutionDir)SDL2_mixer\include\;$(SolutionDir)SDL2_image\include\;$(ProjectDir)\include\SDLProject\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -172,7 +172,7 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)glfw338\lib-vc2022\;$(SolutionDir)glew210\lib\Release\x64;$(SolutionDir)SDL2\lib\$(PlatformTarget);$(SolutionDir)SDL2_ttf\lib\$(PlatformTarget);$(SolutionDir)SDL2_image\lib\$(PlatformTarget);$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;SDL2.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)resources\*" "$(OutDir)"
@@ -183,6 +183,7 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\SDLProject\SDLTemplate.cpp" />
     <ClCompile Include="src\Mesh.cpp" />
     <ClCompile Include="src\BaseApp.cpp" />
     <ClCompile Include="include\Bitmap.cpp" />
@@ -203,6 +204,25 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
     <ClInclude Include="include\GL_Lib.h" />
     <ClInclude Include="include\Macros.h" />
     <ClInclude Include="include\OpenGLApp.h" />
+    <ClInclude Include="include\SDLProject\AnimatedTexture.h" />
+    <ClInclude Include="include\SDLProject\BezierCurve.h" />
+    <ClInclude Include="include\SDLProject\BezierPath.h" />
+    <ClInclude Include="include\SDLProject\BoxCollider.h" />
+    <ClInclude Include="include\SDLProject\CircleCollider.h" />
+    <ClInclude Include="include\SDLProject\Collider.h" />
+    <ClInclude Include="include\SDLProject\GameEntity.h" />
+    <ClInclude Include="include\SDLProject\Graphics.h" />
+    <ClInclude Include="include\SDLProject\managers\AssetManager.h" />
+    <ClInclude Include="include\SDLProject\managers\AudioManager.h" />
+    <ClInclude Include="include\SDLProject\managers\GameManager.h" />
+    <ClInclude Include="include\SDLProject\managers\InputManager.h" />
+    <ClInclude Include="include\SDLProject\managers\PhysicsManager.h" />
+    <ClInclude Include="include\SDLProject\MathHelper.h" />
+    <ClInclude Include="include\SDLProject\PhysicsHelper.h" />
+    <ClInclude Include="include\SDLProject\Random.h" />
+    <ClInclude Include="include\SDLProject\SDLMain.h" />
+    <ClInclude Include="include\SDLProject\SDLTexture.h" />
+    <ClInclude Include="include\SDLProject\Timer.h" />
     <ClInclude Include="include\Window.h" />
     <ClInclude Include="include\Shader.h" />
     <ClInclude Include="include\TriangleBuffer.h" />
