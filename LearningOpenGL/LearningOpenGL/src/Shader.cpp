@@ -6,12 +6,6 @@
 #ifndef SHADER_CODE
 
 #define SHADERCODE
-
-
-
-/*-----------------------------------------------------------------------------
- *  SHADER CODE
- *-----------------------------------------------------------------------------*/
 const char* vert = GLSL(120,
 
     attribute vec4 position;
@@ -22,22 +16,24 @@ attribute vec2 textureCoordinate;
 uniform mat4 projection;
 uniform mat4 view;
 uniform mat4 model;
-uniform mat3 normalMatrix; //<-- This will be used to calculate our normals in eye space
+uniform mat3 normalMatrix; //<-- This will be used to calculate our normals in world space
 
+varying vec4 destColor;
 varying vec2 texCoord;
 varying float diffuse;
 
 //the simplest function to calculate lighting 
-float doColor() {
+vec4 doColor() {
     vec3 norm = normalize(normalMatrix * normalize(normal));
     vec3 light = normalize(vec3(1.0, 1.0, 1.0));
     diffuse = max(dot(norm, light), 0.0);
 
-    return diffuse;
+    return vec4((color * diffuse).xyz, 1.0);
 }
 
 void main(void) {
-    diffuse = doColor();
+    destColor = doColor();
+
     texCoord = textureCoordinate;
     gl_Position = projection * view * model * position;
 }
@@ -45,16 +41,16 @@ void main(void) {
 );
 
 
-
 const char* frag = GLSL(120,
 
     uniform sampler2D sampler;
 
+varying vec4 destColor;
 varying vec2 texCoord;
 varying float diffuse;
 
 void main(void) {
-    gl_FragColor = vec4(texture2D(sampler, texCoord).rgb * diffuse, 1.0);
+    gl_FragColor = vec4(texture2D(sampler, texCoord).rbg * diffuse, 1.0);
 }
 
 );

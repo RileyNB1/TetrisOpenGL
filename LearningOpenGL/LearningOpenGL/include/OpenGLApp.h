@@ -1,22 +1,19 @@
 #pragma once
 
-#include <GL_Lib.h>
+#include <Macros.h>
 #include <Window.h>
 #include <iostream>
-//#include <TriangleBuffer.h>
-#include <Cube.h>
-//#include <DynamicMesh.h>
-//#include <Texture.h>
+#include <Mesh.h>
 
 namespace FOGrP
 {
-	class OpenGLApp// : public MouseListener
+	class OpenGLApp
 	{
-        Window mWindow;
+        static Window mWindow;
 
         //TriangleBuffer mTris;
-        Cube mCube;
-        //DynamicMesh mesh;
+        //Cube mCube;
+        Mesh mesh;
         //Texture mTex;
 
         /// <summary>
@@ -24,13 +21,17 @@ namespace FOGrP
         /// </summary>
         static MVP mvp;
 
+        static OpenGLApp* Instance;
+
+        static Mouse mouse;
+
     public:
 
         OpenGLApp(int width = 640, int height = 480);
 
         static MVP& MVP();
 
-        Window& Window();
+        static Window& Window();
 
         ~OpenGLApp();
 
@@ -45,5 +46,7 @@ namespace FOGrP
         static void OnMouseMove(GLFWwindow* window, double x, double y);
 
         static void OnMouseDown(GLFWwindow* window, int button, int action, int mods);
+
+        static void OnMouseDrag(int x, int y);
 	};
 }

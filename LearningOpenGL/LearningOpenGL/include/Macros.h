@@ -36,6 +36,14 @@ struct MVP
 	}
 };
 
+struct Mouse {
+	bool isDown;
+	int lastX, lastY;
+	int dx, dy;
+	int x, y;
+	glm::quat tmpRot;
+};
+
 #ifndef PI
 #define PI (float)3.14159265359
 #endif

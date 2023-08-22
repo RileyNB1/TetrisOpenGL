@@ -5,9 +5,14 @@
 namespace FOGrP
 {
     MVP OpenGLApp::mvp;
+    Mouse OpenGLApp::mouse;
+    Window OpenGLApp::mWindow;
+    OpenGLApp* OpenGLApp::Instance;
 
     OpenGLApp::OpenGLApp(int width, int height)
     {
+        Instance = this;
+
         if (!glfwInit())
         {
             exit(EXIT_FAILURE);
@@ -87,13 +92,8 @@ namespace FOGrP
         mvp.view = glm::lookAt(mvp.eyePos, mvp.eyePos + mvp.forwardDir, glm::vec3(0, 1, 0));
         mvp.proj = glm::perspective(PI / 3.0f, mWindow.AspectRatio(), 0.1f, -10.0f);
 
-        //mTris.Init(&mWindow);
-
-        mCube.Init(&mWindow, MVP());
-
-        //mesh.Init(&mWindow);
-
-        //mTex.Init(&mWindow);
+        mesh = Mesh();
+        mesh.Init(&mWindow, MVP());
 
         while (!mWindow.ShouldClose())
         {
@@ -113,12 +113,7 @@ namespace FOGrP
 
     void OpenGLApp::OnDraw()
     {
-        //mTris.Draw();
-        mCube.Draw();
-
-        //mesh.Draw();
-
-        //mTex.Draw();
+        mesh.Draw(); 
     }
 
     void OpenGLApp::OnInput()
@@ -164,9 +159,40 @@ namespace FOGrP
 
     void OpenGLApp::OnMouseMove(GLFWwindow* window, double x, double y)
     {
+        mouse.x = x;
+        mouse.y = y;
+
+        if (mouse.isDown)
+        {
+            OnMouseDrag(x, y);
+        }
     }
 
     void OpenGLApp::OnMouseDown(GLFWwindow* window, int button, int action, int mods)
     {
+        if (action == GLFW_PRESS) {
+            mouse.isDown = true;
+            double x, y;
+            glfwGetCursorPos(window, &x, &y);
+            mouse.lastX = x;
+            mouse.lastY = y;
+            mouse.tmpRot = Instance->mesh.mRot;
+        }
+        else {
+            mouse.isDown = false;
+        }
+    }
+
+    void OpenGLApp::OnMouseDrag(int x, int y) 
+    {
+        mouse.dx = mouse.x - mouse.lastX;
+        mouse.dy = mouse.y - mouse.lastY;
+
+        float wx = (float)mouse.dx / mWindow.Width();
+        float wy = (float)mouse.dy / mWindow.Height();
+
+        glm::vec3 axis = glm::cross(glm::vec3(0, 0, 1), glm::vec3(wx, -wy, 0));
+        glm::quat q = glm::angleAxis(glm::length(axis), glm::normalize(axis));
+        Instance->mesh.mRot = q * mouse.tmpRot;
     }
 }

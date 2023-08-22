@@ -10,3 +10,5 @@
 #include <glm.hpp>                   //<-- a nifty math library
 #include <gtc/matrix_transform.hpp>  
 #include <gtc/type_ptr.hpp>
+#include <gtc/quaternion.hpp>
+#include <gtx/quaternion.hpp>

@@ -2,7 +2,6 @@
 
 #include <Macros.h>
 #include <Shader.h>
-#include <Window.h>
 #include <vector>
 #include <Bitmap.cpp>
 
@@ -16,27 +15,24 @@ namespace FOGrP
 
 	class Texture
 	{
-		int th, tw;
-
-		Shader* mShader;
-		Window* mWindow;
-
 		GLuint tID;
-		GLuint arrayID;
-		GLuint bufferID;
-		GLuint positionID;
-		GLuint textureCoordinateID;
-		GLuint samplerID;
+		int width, height;
 
 	public:
 
-		Texture();
+		Texture(int w, int h);
 
-		void Init(Window* window);
+		void Init();
 
 		void BindVertexData();
 
+		void Update(void* data);
+
 		void Draw();
+
+		void Bind();
+
+		void Unbind();
 
 		~Texture();
 
