@@ -3,7 +3,7 @@
 #include <vector>
 #include <BezierCurve.h>
 
-namespace SDLFramework
+namespace sdlFr
 {
     class BezierPath
     {

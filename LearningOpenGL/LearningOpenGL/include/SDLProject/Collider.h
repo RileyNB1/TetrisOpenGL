@@ -2,7 +2,7 @@
 
 #include <SDLTexture.h>
 
-namespace SDLFramework
+namespace sdlFr
 {
     class Collider : public GameEntity 
     {
@@ -24,7 +24,7 @@ namespace SDLFramework
 
         static const bool DEBUG_COLLIDERS = true; 
         
-        SDLFramework::SDLTexture* mDebugTexture;
+        sdlFr::SDLTexture* mDebugTexture;
         
         void SetDebugTexture(SDLTexture* tex);
     };

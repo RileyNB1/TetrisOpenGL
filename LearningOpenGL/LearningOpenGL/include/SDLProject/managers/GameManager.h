@@ -10,7 +10,7 @@
 #include <managers/AudioManager.h>
 #include <managers/PhysicsManager.h>
 
-namespace SDLFramework
+namespace sdlFr
 {
     Graphics* Graphics::sInstance;
     bool Graphics::sInitialized;

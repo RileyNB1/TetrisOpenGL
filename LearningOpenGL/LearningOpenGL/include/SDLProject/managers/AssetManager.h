@@ -7,7 +7,7 @@
 #include <map> 
 #include <SDL_mixer.h>
 
-namespace SDLFramework
+namespace sdlFr
 {
     class AssetManager
     {

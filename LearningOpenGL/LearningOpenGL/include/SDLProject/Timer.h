@@ -2,7 +2,7 @@
 
 #include <SDLMain.h> 
 
-namespace SDLFramework
+namespace sdlFr
 {
     class Timer
     {

@@ -4,7 +4,7 @@
 #include <MathHelper.h>
 #include <cstring>
 
-namespace SDLFramework
+namespace sdlFr
 {
     class InputManager
     {

@@ -4,7 +4,7 @@
 #include <CircleCollider.h>
 #include <MathHelper.h>
 
-namespace SDLFramework
+namespace sdlFr
 {
     inline bool CircleVsCircleCollision(CircleCollider* c1, CircleCollider* c2) 
     { 

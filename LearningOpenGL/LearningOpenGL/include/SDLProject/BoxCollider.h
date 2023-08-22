@@ -2,7 +2,7 @@
 
 #include <Collider.h>
 
-namespace SDLFramework
+namespace sdlFr
 {
     enum BoxCorner
     {

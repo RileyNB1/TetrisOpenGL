@@ -2,7 +2,7 @@
 
 #include <managers/AssetManager.h> 
 
-namespace SDLFramework
+namespace sdlFr
 {
     class AudioManager
     {

@@ -3,7 +3,7 @@
 #include <GameEntity.h>
 #include <managers/AssetManager.h> 
 
-namespace SDLFramework
+namespace sdlFr
 {
     class SDLTexture : public GameEntity
     {

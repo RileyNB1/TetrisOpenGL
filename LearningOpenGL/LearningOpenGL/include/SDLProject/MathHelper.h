@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-namespace SDLFramework
+namespace sdlFr
 {
 #define PI 3.1415926535
 #define DEG_TO_RAD PI / 180.0f
@@ -11,7 +11,8 @@ namespace SDLFramework
     template<typename T>
     T clamp(T value, T lower, T upper)
     {
-        return std::min(upper, std::max(value, lower));
+        //return std::min(upper, std::max(value, lower));
+        return lower;
     }
 
     struct Vector2

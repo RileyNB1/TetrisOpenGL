@@ -2,7 +2,7 @@
 
 #include <Collider.h>
 
-namespace SDLFramework
+namespace sdlFr
 {
     const float DEBUG_IMAGE_SIZE = 50;
 
@@ -40,7 +40,7 @@ namespace SDLFramework
             
             // circle collider file size is 50px 
             
-            mDebugTexture->Scale(Vec2_One * (radius * 2 / SDLFramework::DEBUG_IMAGE_SIZE)); }
+            mDebugTexture->Scale(Vec2_One * (radius * 2 / sdlFr::DEBUG_IMAGE_SIZE)); }
     } 
     
     CircleCollider::~CircleCollider() 

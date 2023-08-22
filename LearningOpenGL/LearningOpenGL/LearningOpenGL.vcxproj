@@ -184,6 +184,9 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="include\SDLProject\SDLTemplate.cpp" />
+    <ClCompile Include="src\sdl_proj\AnimatedTexture.cpp" />
+    <ClCompile Include="src\sdl_proj\managers\PhysicsManager.cpp" />
+    <ClCompile Include="src\sdl_proj\PhysEntity.cpp" />
     <ClCompile Include="src\Mesh.cpp" />
     <ClCompile Include="src\BaseApp.cpp" />
     <ClCompile Include="include\Bitmap.cpp" />
@@ -228,6 +231,7 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
     <ClInclude Include="include\TriangleBuffer.h" />
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\Mesh.h" />
+    <ClInclude Include="include\SDLProject\PhysEntity.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

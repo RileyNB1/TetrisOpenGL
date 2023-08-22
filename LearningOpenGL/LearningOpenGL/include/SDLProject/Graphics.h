@@ -5,7 +5,7 @@
 #include <iostream>
 #include <SDL_ttf.h>
 
-namespace SDLFramework
+namespace sdlFr
 {
     class Graphics
     {
@@ -80,9 +80,23 @@ namespace SDLFramework
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnableClientState(GL_COLOR_ARRAY); 
         
+        glBegin(GL_TRIANGLES);
+
+
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glVertex2f(0, 0);
+
+        glColor3f(0.0f, 1.0f, 0.0f);
+        glVertex2f(0, 500);
+
+        glColor3f(0.0f, 0.0f, 1.0f);
+        glVertex2f(500, 500);
+
+        glEnd();
+
         SDL_GL_SwapWindow(mWindow); 
         
-        glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     }
 
     Graphics::Graphics() : mRenderer(nullptr)
@@ -138,8 +152,6 @@ namespace SDLFramework
         }
 
         mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
-
-        SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
         if (mRenderer == nullptr)
         {
