@@ -37,7 +37,7 @@ namespace sdlFr
     SDL_Texture* AssetManager::GetTexture(std::string filename, bool managed)
     {
         std::string fullPath = SDL_GetBasePath();
-        fullPath.append("Assets\\" + filename);
+        fullPath.append(/*"Assets\\" +*/ filename);
 
         if (mTextures[fullPath] == nullptr)
         {
@@ -89,7 +89,7 @@ namespace sdlFr
     TTF_Font* AssetManager::GetFont(std::string filename, int size)
     {
         std::string fullPath = SDL_GetBasePath();
-        fullPath.append("Assets/" + filename);
+        fullPath.append(/*"Assets/" + */filename);
 
         std::stringstream ss;
         ss << size;
@@ -137,7 +137,7 @@ namespace sdlFr
     Mix_Music* AssetManager::GetMusic(std::string filename, bool managed)
     {
         std::string fullPath = SDL_GetBasePath();
-        fullPath.append("Assets/" + filename);
+        fullPath.append(/*"Assets/" +*/ filename);
 
         if (mMusic[fullPath] == nullptr)
         {
@@ -161,7 +161,7 @@ namespace sdlFr
     {
         std::string fullPath = SDL_GetBasePath();
 
-        fullPath.append("Assets/" + filename);
+        fullPath.append(/*"Assets/" + */filename);
 
         if (mSFX[fullPath] == nullptr)
         {

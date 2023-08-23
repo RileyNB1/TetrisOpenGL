@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Window.h>
-#include <Texture.h>
+#include <TextureBuffer.h>
 #include <vector>
 
 namespace FOGrP
@@ -35,7 +35,7 @@ namespace FOGrP
         Window* mWindow;
 
         MVP mvp;
-        Texture* texture;
+        TextureBuffer* texture;
         float timer = 0.0;
 
     public:

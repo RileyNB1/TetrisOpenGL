@@ -9,6 +9,9 @@
 #include <AnimatedTexture.h>
 #include <managers/AudioManager.h>
 #include <managers/PhysicsManager.h>
+#include <ScreenManager.h>
+
+using namespace Galaga;
 
 namespace sdlFr
 {
@@ -24,7 +27,8 @@ namespace sdlFr
         Graphics* mGraphics;
         AssetManager* mAssetManager;
         InputManager* mInputManager;
-        AudioManager* mAudioManager; 
+        AudioManager* mAudioManager;
+        ScreenManager* mScreenManager;
         PhysicsManager* mPhysicsManager;
 
         SDL_Event mEvent;

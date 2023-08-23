@@ -53,6 +53,8 @@ namespace sdlFr
     {
         mInputManager->Update();
 
+        mScreenManager->Update();
+
         if (mInputManager->KeyDown(SDL_SCANCODE_1))
         {
             mAudioManager->PlaySFX("bling.wav", 0, -1);
@@ -68,6 +70,8 @@ namespace sdlFr
     void GameManager::Render()
     {
         mGraphics->ClearBackBuffer();
+
+        mScreenManager->Render();
 
         mGraphics->Render();
     }
@@ -86,6 +90,7 @@ namespace sdlFr
         mInputManager = InputManager::Instance();
         mAudioManager = AudioManager::Instance();
         mAssetManager = AssetManager::Instance();
+        mScreenManager = ScreenManager::Instance();
         mPhysicsManager = PhysicsManager::Instance();
 
         // verify Graphics module is ready 
@@ -133,6 +138,9 @@ namespace sdlFr
 
         AudioManager::Release();
         mAudioManager = nullptr;
+
+        ScreenManager::Release();
+        mScreenManager = nullptr;
 
         mPhysicsManager->Release();
         mPhysicsManager = nullptr;

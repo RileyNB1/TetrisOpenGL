@@ -17,7 +17,7 @@ namespace FOGrP
 
         mvp.updateUniformLocId(mShader);
 
-        texture = new Texture(32, 32);
+        texture = new TextureBuffer(32, 32);
         glm::vec4 data[32 * 32];
         for (int i = 0; i < 32 * 32; ++i) {
             data[i] = glm::vec4(RAND, RAND, RAND, 1.0);

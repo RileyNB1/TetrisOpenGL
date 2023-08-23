@@ -1,20 +1,20 @@
 #pragma once
 
-#include <Texture.h>
+#include <TextureBuffer.h>
 
 namespace FOGrP
 {
-    FOGrP::Texture::Texture(int w, int h) : width(w), height(h) 
+    TextureBuffer::TextureBuffer(int w, int h) : width(w), height(h)
     {
         Init();
     };
 
-    void FOGrP::Texture::Init()
+    void TextureBuffer::Init()
     {
         BindVertexData();
     }
 
-    void FOGrP::Texture::BindVertexData()
+    void TextureBuffer::BindVertexData()
     {
 
         glGenTextures(1, &tID);
@@ -44,7 +44,7 @@ namespace FOGrP
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 
-    void Texture::Update(void* data)
+    void TextureBuffer::Update(void* data)
     {
         Bind();
         /*-----------------------------------------------------------------------------
@@ -57,16 +57,16 @@ namespace FOGrP
         Unbind();
     }
 
-    void Texture::Bind() 
+    void TextureBuffer::Bind()
     { 
         glBindTexture(GL_TEXTURE_2D, tID); 
     }
-    void Texture::Unbind() 
+    void TextureBuffer::Unbind()
     { 
         glBindTexture(GL_TEXTURE_2D, 0); 
     }
 
-    FOGrP::Texture::~Texture()
+    TextureBuffer::~TextureBuffer()
     {
     }
 }

@@ -1,11 +1,10 @@
 #pragma once
 
-#include <GameEntity.h>
-#include <managers/AssetManager.h> 
+#include <Texture.h>
 
 namespace sdlFr
 {
-    class SDLTexture : public GameEntity
+    class SDLTexture : public Texture
     {
     protected:
 

@@ -1,4 +1,5 @@
 #include <Graphics.h>
+#include <SDLGraphics.h>
 
 namespace sdlFr
 {
@@ -9,7 +10,7 @@ namespace sdlFr
     {
         if (sInstance == nullptr)
         {
-            sInstance = new Graphics();
+            sInstance = new SDLGraphics();
         }
         return sInstance;
     }
@@ -24,38 +25,6 @@ namespace sdlFr
     bool Graphics::Initialized()
     {
         return sInitialized;
-    }
-
-    void Graphics::ClearBackBuffer()
-    {
-        SDL_RenderClear(mRenderer);
-    }
-
-    void Graphics::Render()
-    {
-        SDL_RenderPresent(mRenderer);
-
-        glClearDepth(1.0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glEnableClientState(GL_COLOR_ARRAY);
-
-        glBegin(GL_TRIANGLES);
-
-
-        glColor3f(1.0f, 0.0f, 0.0f);
-        glVertex2f(0, 0);
-
-        glColor3f(0.0f, 1.0f, 0.0f);
-        glVertex2f(0, 500);
-
-        glColor3f(0.0f, 0.0f, 1.0f);
-        glVertex2f(500, 500);
-
-        glEnd();
-
-        SDL_GL_SwapWindow(mWindow);
-
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     }
 
     Graphics::Graphics() : mRenderer(nullptr)
@@ -90,7 +59,7 @@ namespace sdlFr
             SDL_WINDOWPOS_UNDEFINED, // window y pos 
             SCREEN_WIDTH, // window width 
             SCREEN_HEIGHT, // window height 
-            SDL_WINDOW_OPENGL); // window flags 
+            SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL); // window flags 
 
         glContext = SDL_GL_CreateContext(mWindow);
         if (glContext == nullptr) {
@@ -154,13 +123,7 @@ namespace sdlFr
         float angle,
         SDL_RendererFlip flip)
     {
-        SDL_RenderCopyEx(mRenderer,
-            tex,
-            srcRect,
-            dstRect,
-            angle,
-            nullptr,
-            flip);
+        /**/
     }
 
     SDL_Texture* Graphics::CreateTextTexture(TTF_Font* font,

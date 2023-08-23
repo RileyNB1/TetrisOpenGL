@@ -2,61 +2,33 @@
 
 namespace sdlFr
 {
-    SDLTexture::SDLTexture(std::string filename, bool managed)
+    SDLTexture::SDLTexture(std::string filename, bool managed) : Texture(filename, managed)
     {
-        mGraphics = Graphics::Instance();
-
-        mTex = AssetManager::Instance()->GetTexture(filename, managed);
-
-        SDL_QueryTexture(mTex, nullptr, nullptr, &mWidth, &mHeight);
-
-        mClipped = false;
-        mDestinationRect.w = mWidth;
-        mDestinationRect.h = mHeight;
+        
     }
 
     SDLTexture::SDLTexture(std::string filename,
         int x, int y, int w, int h,
-        bool managed)
+        bool managed) : Texture(filename,
+            x, y, w, h,
+            managed)
     {
-        mGraphics = Graphics::Instance();
-        mTex = AssetManager::Instance()->GetTexture(filename, managed);
-
-        mWidth = w;
-        mHeight = h;
-        mClipped = true;
-        mDestinationRect.w = mWidth;
-        mDestinationRect.h = mHeight;
-
-        mSourceRect.x = x;
-        mSourceRect.y = y;
-        mSourceRect.w = mWidth;
-        mSourceRect.h = mHeight;
+       
     }
 
     SDLTexture::SDLTexture(std::string text,
         std::string fontPath,
         int size, SDL_Color color,
-        bool managed)
+        bool managed) : Texture(text,
+            fontPath,
+            size, color,
+            managed)
     {
-        mGraphics = Graphics::Instance();
-
-        mTex = AssetManager::Instance()->
-            GetText(text, fontPath, size, color, managed);
-
-        mClipped = false;
-
-        SDL_QueryTexture(mTex, nullptr, nullptr, &mWidth, &mHeight);
-
-        mDestinationRect.w = mWidth;
-        mDestinationRect.h = mHeight;
+        
     }
 
     SDLTexture::~SDLTexture()
     {
-        AssetManager::Instance()->DestroyTexture(mTex);
-        mTex = nullptr;
-        mGraphics = nullptr;
     }
 
     Vector2 SDLTexture::ScaledDimensions()
@@ -75,16 +47,6 @@ namespace sdlFr
 
     void SDLTexture::Render()
     {
-        Vector2 pos = Position(World);
-        Vector2 scale = Scale(World);
-        mDestinationRect.x = (int)(pos.x - mWidth * 0.5f);
-        mDestinationRect.y = (int)(pos.y - mHeight * 0.5f);
-        mDestinationRect.w = (int)(mWidth * scale.x);
-        mDestinationRect.h = (int)(mHeight * scale.y);
-
-        mGraphics->DrawTexture(mTex,
-            mClipped ? &mSourceRect : nullptr,
-            &mDestinationRect,
-            Rotation(World));
+        Texture::Render();
     }
 }

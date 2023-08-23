@@ -7,35 +7,24 @@
 
 namespace FOGrP
 {
-	struct TexVertex 
+	struct TexVertex
 	{
 		glm::vec2 position;
 		glm::vec2 textureCoordinate;
 	};
 
-	class Texture
+	class TextureBuffer
 	{
 		GLuint tID;
 		int width, height;
-
 	public:
-
-		Texture(int w, int h);
-
+		TextureBuffer(int w, int h);
 		void Init();
-
 		void BindVertexData();
-
 		void Update(void* data);
-
 		void Draw();
-
 		void Bind();
-
 		void Unbind();
-
-		~Texture();
-
+		~TextureBuffer();
 	};
 }
-

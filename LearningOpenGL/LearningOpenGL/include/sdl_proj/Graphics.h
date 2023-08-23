@@ -16,10 +16,12 @@ namespace sdlFr
         static Graphics* Instance();
         static void Release();
         static bool Initialized();
-        void ClearBackBuffer();
-        void Render();
+
+        void virtual ClearBackBuffer() = 0;
+        void virtual Render() = 0;
+
         SDL_Texture* LoadTexture(std::string path);
-        void DrawTexture(SDL_Texture* tex,
+        virtual void DrawTexture(SDL_Texture* tex,
             SDL_Rect* srcRect = nullptr,
             SDL_Rect* dstRect = nullptr,
             float angle = 0.0f,
@@ -32,7 +34,7 @@ namespace sdlFr
         void DrawLine(float startX, float startY, float endX, float endY);
         void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
-    private:
+    protected:
         static Graphics* sInstance;
         static bool sInitialized;
 
@@ -42,6 +44,6 @@ namespace sdlFr
 
         Graphics();
         ~Graphics();
-        bool Init();
+        bool virtual Init();
     };
 }
