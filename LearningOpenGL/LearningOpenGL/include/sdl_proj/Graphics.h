@@ -21,6 +21,7 @@ namespace sdlFr
         void virtual Render() = 0;
 
         SDL_Texture* LoadTexture(std::string path);
+        
         virtual void DrawTexture(SDL_Texture* tex,
             SDL_Rect* srcRect = nullptr,
             SDL_Rect* dstRect = nullptr,

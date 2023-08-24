@@ -183,6 +183,9 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\opengl\ShaderUtil.cpp" />
+    <ClCompile Include="src\opengl\GLTexture.cpp" />
+    <ClCompile Include="src\opengl\GLGraphics.cpp" />
     <ClCompile Include="include\opengl\Bitmap.cpp" />
     <ClCompile Include="include\sdl_proj\SDLTemplate.cpp" />
     <ClCompile Include="include\sdl_proj\tinyxml\tinyxml2.cpp" />
@@ -233,6 +236,8 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
     <ClCompile Include="src\sdl_proj\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\opengl\GLTexture.h" />
+    <ClInclude Include="include\opengl\GLGraphics.h" />
     <ClInclude Include="include\galaga\BackgroundStars.h" />
     <ClInclude Include="include\galaga\Boss.h" />
     <ClInclude Include="include\galaga\Bullet.h" />
@@ -285,6 +290,7 @@ copy /Y "$(SolutionDir)SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
     <ClInclude Include="include\sdl_proj\Texture.h" />
     <ClInclude Include="include\sdl_proj\Timer.h" />
     <ClInclude Include="include\sdl_proj\tinyxml\tinyxml2.h" />
+    <ClInclude Include="include\opengl\ShaderUtil.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

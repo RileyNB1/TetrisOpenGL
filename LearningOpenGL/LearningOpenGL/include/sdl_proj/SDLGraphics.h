@@ -12,6 +12,7 @@ namespace sdlFr
 
 		void virtual ClearBackBuffer() override;
 		void virtual Render() override;
+		
 		virtual void DrawTexture(SDL_Texture* tex,
 			SDL_Rect* srcRect = nullptr,
 			SDL_Rect* dstRect = nullptr,

@@ -6,7 +6,7 @@ namespace sdlFr
 	{
 		if (sInstance == nullptr) 
 		{
-			Graphics::Instance();
+			sInstance = new SDLGraphics();
 		}
 		return static_cast<SDLGraphics*>(sInstance);
 	}

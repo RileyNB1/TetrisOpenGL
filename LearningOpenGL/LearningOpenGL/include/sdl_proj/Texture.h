@@ -15,11 +15,11 @@ namespace sdlFr
         SDL_Rect mDestinationRect;
         int mWidth; int mHeight;
         Graphics* mGraphics;
-        SDL_Texture* mTex;
 
         bool mClipped;
 
     public:
+        SDL_Texture* mTex;
         Texture(std::string filename, bool managed = false);
 
         Texture(std::string filename,

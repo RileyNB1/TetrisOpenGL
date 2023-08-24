@@ -18,141 +18,321 @@
     <ClCompile Include="LearningOpenGL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\OpenGLApp.cpp">
+    <ClCompile Include="src\opengl\GLGraphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Window.cpp">
+    <ClCompile Include="include\opengl\Bitmap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\MouseListener.h">
+    <ClCompile Include="include\sdl_proj\SDLTemplate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Shader.cpp">
+    <ClCompile Include="include\sdl_proj\tinyxml\tinyxml2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\TriangleBuffer.cpp">
+    <ClCompile Include="src\galaga\BackgroundStars.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Bitmap.cpp">
+    <ClCompile Include="src\galaga\Boss.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\DynamicMesh.cpp">
+    <ClCompile Include="src\galaga\Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Cube.cpp">
+    <ClCompile Include="src\galaga\Butterfly.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\TextureBuffer.cpp">
+    <ClCompile Include="src\galaga\CaptureBeam.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\BaseApp.cpp">
+    <ClCompile Include="src\galaga\Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mesh.cpp">
+    <ClCompile Include="src\galaga\Formation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\SDLProject\SDLTemplate.cpp">
+    <ClCompile Include="src\galaga\Level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\galaga\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\galaga\PlayScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\galaga\PlaySideBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\galaga\Scoreboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\galaga\ScreenManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\galaga\Star.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\galaga\StarLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\galaga\StartScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\galaga\Wasp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl\BaseApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl\Cube.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl\DynamicMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl\OpenGLApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl\TextureBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl\TriangleBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\AnimatedTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\BezierPath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\BoxCollider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\CircleCollider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\Collider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\GameEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\Graphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\managers\AssetManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\managers\AudioManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\managers\GameManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\managers\InputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\managers\PhysicsManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\PhysEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\Random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\SDLGraphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\SDLTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdl_proj\Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl\GLTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl\ShaderUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\OpenGLApp.h">
+    <ClInclude Include="include\opengl\GLGraphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Window.h">
+    <ClInclude Include="include\galaga\BackgroundStars.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\GL_Lib.h">
+    <ClInclude Include="include\galaga\Boss.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Shader.h">
+    <ClInclude Include="include\galaga\Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\TriangleBuffer.h">
+    <ClInclude Include="include\galaga\Butterfly.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\DynamicMesh.h">
+    <ClInclude Include="include\galaga\CaptureBeam.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Cube.h">
+    <ClInclude Include="include\galaga\Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Macros.h">
+    <ClInclude Include="include\galaga\Formation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\Texture.h">
+    <ClInclude Include="include\galaga\Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\BaseApp.h">
+    <ClInclude Include="include\galaga\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Mesh.h">
+    <ClInclude Include="include\galaga\PlayScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\managers\AssetManager.h">
+    <ClInclude Include="include\galaga\PlaySideBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\managers\AudioManager.h">
+    <ClInclude Include="include\galaga\Scoreboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\managers\GameManager.h">
+    <ClInclude Include="include\galaga\ScreenManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\managers\InputManager.h">
+    <ClInclude Include="include\galaga\Star.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\managers\PhysicsManager.h">
+    <ClInclude Include="include\galaga\StarLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\AnimatedTexture.h">
+    <ClInclude Include="include\galaga\StartScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\BezierCurve.h">
+    <ClInclude Include="include\galaga\Wasp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\BezierPath.h">
+    <ClInclude Include="include\opengl\BaseApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\BoxCollider.h">
+    <ClInclude Include="include\opengl\Cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\CircleCollider.h">
+    <ClInclude Include="include\opengl\DynamicMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\Collider.h">
+    <ClInclude Include="include\opengl\GL_Lib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\GameEntity.h">
+    <ClInclude Include="include\opengl\Macros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\Graphics.h">
+    <ClInclude Include="include\opengl\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\MathHelper.h">
+    <ClInclude Include="include\opengl\MouseListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\PhysicsHelper.h">
+    <ClInclude Include="include\opengl\OpenGLApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\Random.h">
+    <ClInclude Include="include\opengl\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\SDLMain.h">
+    <ClInclude Include="include\opengl\TextureBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\SDLTexture.h">
+    <ClInclude Include="include\opengl\TriangleBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\Timer.h">
+    <ClInclude Include="include\opengl\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\PhysEntity.h">
+    <ClInclude Include="include\sdl_proj\AnimatedTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SDLProject\SDLGraphics.h">
+    <ClInclude Include="include\sdl_proj\BezierCurve.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\TextureBuffer.h">
+    <ClInclude Include="include\sdl_proj\BezierPath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\BoxCollider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\CircleCollider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\Collider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\GameEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\Graphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\managers\AssetManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\managers\AudioManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\managers\GameManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\managers\InputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\managers\PhysicsManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\MathHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\PhysEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\PhysicsHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\SDLGraphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\SDLMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\SDLTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl_proj\tinyxml\tinyxml2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opengl\GLTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opengl\ShaderUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
