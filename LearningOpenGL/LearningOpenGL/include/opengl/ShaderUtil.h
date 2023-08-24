@@ -5,7 +5,6 @@
 
 namespace FOGrP 
 {
-
 	enum class ShaderType {
 		Vertex,
 		Fragment,

@@ -129,4 +129,32 @@ namespace sdlFr
     
     const Vector2 Vec2_Down = { 0.0f, -1.0f };
     const Vector2 Vec2_Left = { -1.0f, 0.0f };
+
+    struct Vertex {
+        Vector2 position;
+        struct UV {
+            float u;
+            float v;
+        } uv;
+        struct Color {
+            float r;
+            float g;
+            float b;
+            float a;
+        } color;
+        void SetPosition(float x, float y) {
+            position.x = x;
+            position.y = y;
+        }
+        void SetUV(float u, float v) {
+            uv.u = u;
+            uv.v = v;
+        }
+        void SetColor(float r, float g, float b, float a) {
+            color.r = r;
+            color.g = g;
+            color.b = b;
+            color.a = a;
+        }
+    };
 }

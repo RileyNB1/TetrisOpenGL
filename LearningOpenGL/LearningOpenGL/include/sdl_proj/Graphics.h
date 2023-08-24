@@ -35,6 +35,11 @@ namespace sdlFr
         void DrawLine(float startX, float startY, float endX, float endY);
         void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
+        SDL_Surface* GetSurfaceText(TTF_Font* font, std::string text,
+            SDL_Color color); 
+        
+        SDL_Surface* GetSurfaceTexture(std::string path);
+
     protected:
         static Graphics* sInstance;
         static bool sInitialized;

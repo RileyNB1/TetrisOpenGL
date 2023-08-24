@@ -1,8 +1,11 @@
 #include <managers/AssetManager.h>
+#include <fstream>
 
 namespace sdlFr
 {
     AssetManager* AssetManager::sInstance = nullptr;
+
+    std::map<std::string, ShaderUtil> AssetManager::shaders;
 
     AssetManager* AssetManager::Instance()
     {
@@ -212,5 +215,122 @@ namespace sdlFr
                 return; // work finished, leave function 
             }
         }
+    }
+
+    SDL_Surface* AssetManager::GetSurfaceTexture(std::string filename, bool managed) 
+    {
+        std::string fullPath = SDL_GetBasePath();
+        fullPath.append("Assets/" + filename);
+        if (mSurfaceTextures[fullPath] == nullptr) 
+        {
+            mSurfaceTextures[fullPath] =
+                Graphics::Instance()->GetSurfaceTexture(fullPath);
+        }
+        if (mSurfaceTextures[fullPath] != nullptr && managed) 
+        {
+            mSurfaceaceRefCount[mSurfaceTextures[fullPath]] += 1;
+        }
+        return mSurfaceTextures[fullPath];
+    }
+    
+    SDL_Surface * AssetManager::GetSurfaceText(std::string text, std::string filename,
+            int size, SDL_Color color, bool managed) 
+    {
+        std::stringstream ss;
+        ss << size << (int)color.r << (int)color.g << (int)color.b;
+        std::string key = text + filename + ss.str();
+        if (mSurfaceText[key] == nullptr) 
+        {
+            TTF_Font* font = GetFont(filename, size);
+            mSurfaceText[key] =
+                Graphics::Instance()->GetSurfaceText(font, text, color);
+        }
+        if (mSurfaceText[key] != nullptr && managed) 
+        {
+            mSurfaceaceRefCount[mSurfaceText[key]] += 1;
+        }
+        return mSurfaceText[key];
+    }
+
+    void AssetManager::DestroySurface(SDL_Surface* surface)
+    {
+        if (mSurfaceaceRefCount.find(surface) != mSurfaceaceRefCount.end()) 
+        {
+            mSurfaceaceRefCount[surface] -= 1;
+            if (mSurfaceaceRefCount[surface] == 0) 
+            {
+                for (auto elem : mSurfaceTextures) 
+                {
+                    if (elem.second == surface) 
+                    {
+                        SDL_FreeSurface(elem.second);
+                        mSurfaceTextures.erase(elem.first);
+                        return; // work finished, leave function
+                    }
+                }
+                for (auto elem : mSurfaceText) 
+                {
+                    if (elem.second == surface) 
+                    {
+                        SDL_FreeSurface(elem.second);
+                        mSurfaceText.erase(elem.first);
+                        return; // work finished, leave function
+                    }
+                }
+            }
+        }
+    }
+
+    ShaderUtil AssetManager::LoadShader(const GLchar* vShaderFile, const GLchar*
+        fShaderFile, const GLchar* gShaderFile, std::string name) {
+        shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
+        return shaders[name];
+    }
+    
+    ShaderUtil AssetManager::GetShader(std::string name) {
+        return shaders[name];
+    }
+    
+    ShaderUtil AssetManager::loadShaderFromFile(const GLchar * vShaderFile,
+            const GLchar * fShaderFile, const GLchar * gShaderFile /*= nullptr*/) {
+        // 1. Retrieve the vertex/fragment source code from filePath
+        std::string vertexCode;
+        std::string fragmentCode;
+        std::string geometryCode;
+        try {
+            // Open files
+            std::ifstream vertexShaderFile(vShaderFile);
+            std::ifstream fragmentShaderFile(fShaderFile);
+            std::stringstream vShaderStream, fShaderStream;
+            // Read file's buffer contents into streams
+            vShaderStream << vertexShaderFile.rdbuf();
+            fShaderStream << fragmentShaderFile.rdbuf();
+            // close file handlers
+            vertexShaderFile.close();
+            fragmentShaderFile.close();
+            // Convert stream into string
+            vertexCode = vShaderStream.str();
+            fragmentCode = fShaderStream.str();
+            // If geometry shader path is present, also load a geometry shader
+            if (gShaderFile != nullptr)
+            {
+                std::ifstream geometryShaderFile(gShaderFile);
+                std::stringstream gShaderStream;
+                gShaderStream << geometryShaderFile.rdbuf();
+                geometryShaderFile.close();
+                geometryCode = gShaderStream.str();
+            }
+        }
+        catch (std::exception e) {
+            std::cout << "ERROR::SHADER: Failed to read shader files" << std::endl;
+        }
+        const GLchar* vShaderCode = vertexCode.c_str();
+        const GLchar* fShaderCode = fragmentCode.c_str();
+        const GLchar* gShaderCode = geometryCode.c_str();
+        // 2. Now create shader object from source code
+        ShaderUtil shader;
+        shader.Compile(vShaderCode, fShaderCode, gShaderFile != nullptr ?
+            gShaderCode : nullptr);
+        return shader;
     }
 }
