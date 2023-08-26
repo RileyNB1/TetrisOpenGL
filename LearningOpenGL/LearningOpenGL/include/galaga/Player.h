@@ -6,7 +6,7 @@
 #include <AnimatedTexture.h>
 #include <Bullet.h>
 
-using namespace sdlFr;
+using namespace FOGrP;
 
 namespace Galaga
 {

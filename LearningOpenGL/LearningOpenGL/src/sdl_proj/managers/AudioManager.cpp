@@ -1,6 +1,6 @@
 #include <managers/AudioManager.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     AudioManager* AudioManager::sInstance = nullptr;
 

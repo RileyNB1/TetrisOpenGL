@@ -6,8 +6,6 @@
 #include <Scoreboard.h>
 #include <BackgroundStars.h>
 
-using namespace sdlFr;
-
 namespace Galaga
 {
     class StartScreen : public GameEntity
@@ -17,23 +15,23 @@ namespace Galaga
         InputManager* mInput;
 
         GameEntity* mTopBar;
-        SDLTexture* mPlayerOne;
-        SDLTexture* mPlayerTwo;
-        SDLTexture* mHiScore;
+        GLTexture* mPlayerOne;
+        GLTexture* mPlayerTwo;
+        GLTexture* mHiScore;
 
         // Play Mode Entities 
         GameEntity* mPlayModes;
-        SDLTexture* mOnePlayerMode;
-        SDLTexture* mTwoPlayerMode;
-        SDLTexture* mCursor;
+        GLTexture* mOnePlayerMode;
+        GLTexture* mTwoPlayerMode;
+        GLTexture* mCursor;
 
         // Bottom Bar Entities 
         GameEntity* mBottomBar;
-        SDLTexture* mNamco;
-        SDLTexture* mDates;
-        SDLTexture* mRights;
+        GLTexture* mNamco;
+        GLTexture* mDates;
+        GLTexture* mRights;
 
-        SDLTexture* mLogo;
+        GLTexture* mLogo;
 
         Vector2 mAnimationStartPos;
         Vector2 mAnimationEndPos;

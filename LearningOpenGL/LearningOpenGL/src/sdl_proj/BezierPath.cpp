@@ -1,6 +1,6 @@
 #include <BezierPath.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     BezierPath::BezierPath()
     { }

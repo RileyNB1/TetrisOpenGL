@@ -1,336 +1,353 @@
 #include <managers/AssetManager.h>
 #include <fstream>
+#include <GLGraphics.h>
 
-namespace sdlFr
+namespace FOGrP
 {
-    AssetManager* AssetManager::sInstance = nullptr;
+	AssetManager* AssetManager::sInstance = nullptr;
 
-    std::map<std::string, ShaderUtil> AssetManager::shaders;
+	AssetManager* AssetManager::Instance() {
+		if (sInstance == nullptr) {
+			sInstance = new AssetManager();
+		}
 
-    AssetManager* AssetManager::Instance()
-    {
-        if (sInstance == nullptr)
-        {
-            sInstance = new AssetManager();
-        }
-        return sInstance;
-    }
+		return sInstance;
+	}
 
-    void AssetManager::Release()
-    {
-        delete sInstance;
-        sInstance = nullptr;
-    }
+	void AssetManager::Release() {
+		delete sInstance;
+		sInstance = nullptr;
+	}
 
-    AssetManager::AssetManager()
-    { }
+	AssetManager::AssetManager() {
+	}
 
-    AssetManager::~AssetManager()
-    {
-        for (auto tex : mTextures)
-        {
-            if (tex.second != nullptr)
-            {
-                SDL_DestroyTexture(tex.second);
-            }
-        }
-        mTextures.clear();
-    }
+	AssetManager::~AssetManager() {
+		for (auto tex : mTextures) {
+			if (tex.second != nullptr) {
+				SDL_DestroyTexture(tex.second);
+			}
+		}
+		mTextures.clear();
 
-    SDL_Texture* AssetManager::GetTexture(std::string filename, bool managed)
-    {
-        std::string fullPath = SDL_GetBasePath();
-        fullPath.append(/*"Assets\\" +*/ filename);
+		for (auto text : mText) {
+			if (text.second != nullptr) {
+				SDL_DestroyTexture(text.second);
+			}
+		}
+		mText.clear();
 
-        if (mTextures[fullPath] == nullptr)
-        {
-            mTextures[fullPath] = Graphics::Instance()->LoadTexture(fullPath);
-        }
+		for (auto font : mFonts) {
+			if (font.second != nullptr) {
+				TTF_CloseFont(font.second);
+			}
+		}
+		mFonts.clear();
 
-        if (mTextures[fullPath] != nullptr && managed)
-        {
-            mTextureRefCount[mTextures[fullPath]] += 1;
-        }
-        return mTextures[fullPath];
-    }
+		for (auto mus : mMusic) {
+			if (mus.second != nullptr) {
+				Mix_FreeMusic(mus.second);
+			}
+		}
+		mMusic.clear();
 
-    void AssetManager::DestroyTexture(SDL_Texture* texture)
-    {
-        if (mTextureRefCount.find(texture) != mTextureRefCount.end())
-        {
-            mTextureRefCount[texture] -= 1;
-            if (mTextureRefCount[texture] == 0)
-            {
-                for (auto elem : mTextures)
-                {
-                    if (elem.second == texture)
-                    {
-                        SDL_DestroyTexture(elem.second);
-                        mTextures.erase(elem.first);
-                        return; // work finished, leave function 
-                    }
-                }
+		for (auto sfx : mSFX) {
+			if (sfx.second != nullptr) {
+				Mix_FreeChunk(sfx.second);
+			}
+		}
+		mSFX.clear();
+	}
 
-                for (auto elem : mText)
-                {
-                    if (elem.second == texture)
-                    {
-                        SDL_DestroyTexture(elem.second);
-                        mText.erase(elem.first);
+	SDL_Texture* AssetManager::GetTexture(std::string filename, bool managed) {
+		std::string fullPath = SDL_GetBasePath();
+		fullPath.append("Assets/" + filename);
 
-                        return; // work finished, leave function 
-                    }
-                }
-            }
-        }
-        else
-        {
-            SDL_DestroyTexture(texture);
-        }
-    }
+		if (mTextures[fullPath] == nullptr) {
+			mTextures[fullPath] = Graphics::Instance()->LoadTexture(fullPath);
+		}
 
-    TTF_Font* AssetManager::GetFont(std::string filename, int size)
-    {
-        std::string fullPath = SDL_GetBasePath();
-        fullPath.append(/*"Assets/" + */filename);
+		if (mTextures[fullPath] != nullptr && managed) {
+			mTextureRefCount[mTextures[fullPath]] += 1;
+		}
 
-        std::stringstream ss;
-        ss << size;
-        std::string key = fullPath + ss.str();
+		return mTextures[fullPath];
+	}
 
-        if (mFonts[key] == nullptr)
-        {
-            mFonts[key] = TTF_OpenFont(fullPath.c_str(), size);
+	TTF_Font* AssetManager::GetFont(std::string filename, int size) {
+		std::string fullPath = SDL_GetBasePath();
+		fullPath.append(filename);
 
-            if (mFonts[key] == nullptr)
-            {
-                std::cerr << "Unable to load font " << filename
-                    << "! TTF Error: " << TTF_GetError() << std::endl;
-            }
-        }
-        return mFonts[key];
-    }
+		std::stringstream ss;
+		ss << size;
+		std::string key = fullPath + ss.str();
 
-    SDL_Texture* AssetManager::GetText(std::string text,
-        std::string filename,
-        int size,
-        SDL_Color color, bool managed)
-    {
-        std::stringstream ss;
-        ss << size
-            << (int)color.r
-            << (int)color.g
-            << (int)color.b;
+		if (mFonts[key] == nullptr) {
+			mFonts[key] = TTF_OpenFont(fullPath.c_str(), size);
+			if (mFonts[key] == nullptr) {
+				std::cerr << "Unable to load font " << filename << "! TTF Error: " << TTF_GetError() << std::endl;
+			}
+		}
 
-        std::string key = text + filename + ss.str();
+		return mFonts[key];
+	}
 
-        if (mText[key] == nullptr)
-        {
-            TTF_Font* font = GetFont(filename, size);
-            mText[key] = Graphics::Instance()->CreateTextTexture(font, text, color);
-        }
+	void AssetManager::UnloadTexture(SDL_Texture* texture) {
+		bool found = false;
+		std::string key;
+		std::map<std::string, SDL_Texture*>::iterator it;
 
-        if (mText[key] != nullptr && managed)
-        {
-            mTextureRefCount[mText[key]] += 1;
-        }
-        return mText[key];
-    }
+		for (it = mTextures.begin(); it != mTextures.end() && !found; it++) {
+			if ((found = it->second == texture)) {
+				SDL_DestroyTexture(it->second);
+				key = it->first;
+			}
+		}
 
-    Mix_Music* AssetManager::GetMusic(std::string filename, bool managed)
-    {
-        std::string fullPath = SDL_GetBasePath();
-        fullPath.append(/*"Assets/" +*/ filename);
+		if (found) {
+			mTextures.erase(key);
+		}
+	}
 
-        if (mMusic[fullPath] == nullptr)
-        {
-            mMusic[fullPath] = Mix_LoadMUS(fullPath.c_str());
-        }
+	void AssetManager::UnloadSurface(SDL_Surface* surface) {
+		bool found = false;
+		std::string key;
+		std::map<std::string, SDL_Surface*>::iterator it;
 
-        if (mMusic[fullPath] == nullptr)
-        {
-            std::cerr << "Unable to load music " << filename
-                << "! Mix error: " << Mix_GetError() << std::endl;
-        }
-        else if (managed)
-        {
-            mMusicRefCount[mMusic[fullPath]] += 1;
-        }
+		for (it = mSurfaces.begin(); it != mSurfaces.end() && !found; it++) {
+			if ((found = it->second == surface)) {
+				SDL_FreeSurface(it->second);
+				key = it->first;
+			}
+		}
 
-        return mMusic[fullPath];
-    }
+		if (found) {
+			mSurfaces.erase(key);
+		}
+	}
 
-    Mix_Chunk* AssetManager::GetSFX(std::string filename, bool managed)
-    {
-        std::string fullPath = SDL_GetBasePath();
+	void AssetManager::UnloadMusic(Mix_Music* music) {
+		bool found = false;
+		std::string key;
+		std::map<std::string, Mix_Music*>::iterator it;
 
-        fullPath.append(/*"Assets/" + */filename);
+		for (it = mMusic.begin(); it != mMusic.end() && !found; it++) {
+			if ((found = it->second == music)) {
+				Mix_FreeMusic(it->second);
+				key = it->first;
+			}
+		}
 
-        if (mSFX[fullPath] == nullptr)
-        {
-            mSFX[fullPath] = Mix_LoadWAV(fullPath.c_str());
-        }
+		if (found) {
+			mMusic.erase(key);
+		}
+	}
 
-        if (mSFX[fullPath] == nullptr)
-        {
-            std::cerr << "Unable to load SFX " << filename
-                << "! Mix error: " << Mix_GetError() << std::endl;
-        }
-        else if (managed)
-        {
-            mSFXRefCount[mSFX[fullPath]] += 1;
-        }
+	void AssetManager::UnloadSFX(Mix_Chunk* chunk) {
+		bool found = false;
+		std::string key;
+		std::map<std::string, Mix_Chunk*>::iterator it;
 
-        return mSFX[fullPath];
-    }
+		for (it = mSFX.begin(); it != mSFX.end() && !found; it++) {
+			if ((found = it->second == chunk)) {
+				Mix_FreeChunk(it->second);
+				key = it->first;
+			}
+		}
 
-    void AssetManager::DestroyMusic(Mix_Music* music)
-    {
-        for (auto elem : mMusic)
-        {
-            if (elem.second == music)
-            {
-                mMusicRefCount[elem.second] -= 1;
-                if (mMusicRefCount[elem.second] == 0)
-                {
-                    Mix_FreeMusic(elem.second); mMusic.erase(elem.first);
-                }
-                return; // work finished, leave function 
-            }
-        }
-    }
+		if (found) {
+			mSFX.erase(key);
+		}
+	}
 
-    void AssetManager::DestroySFX(Mix_Chunk* sfx)
-    {
-        for (auto elem : mSFX)
-        {
-            if (elem.second == sfx)
-            {
-                mSFXRefCount[elem.second] -= 1;
-                if (mSFXRefCount[elem.second] == 0)
-                {
-                    Mix_FreeChunk(elem.second);
-                    mSFX.erase(elem.first);
-                }
-                return; // work finished, leave function 
-            }
-        }
-    }
+	SDL_Texture* AssetManager::GetText(std::string text, std::string filename, int size, SDL_Color color, bool managed) {
+		std::stringstream ss;
+		ss << size << (int)color.r << (int)color.g << (int)color.b;
+		std::string key = text + filename + ss.str();
 
-    SDL_Surface* AssetManager::GetSurfaceTexture(std::string filename, bool managed) 
-    {
-        std::string fullPath = SDL_GetBasePath();
-        fullPath.append("Assets/" + filename);
-        if (mSurfaceTextures[fullPath] == nullptr) 
-        {
-            mSurfaceTextures[fullPath] =
-                Graphics::Instance()->GetSurfaceTexture(fullPath);
-        }
-        if (mSurfaceTextures[fullPath] != nullptr && managed) 
-        {
-            mSurfaceaceRefCount[mSurfaceTextures[fullPath]] += 1;
-        }
-        return mSurfaceTextures[fullPath];
-    }
-    
-    SDL_Surface * AssetManager::GetSurfaceText(std::string text, std::string filename,
-            int size, SDL_Color color, bool managed) 
-    {
-        std::stringstream ss;
-        ss << size << (int)color.r << (int)color.g << (int)color.b;
-        std::string key = text + filename + ss.str();
-        if (mSurfaceText[key] == nullptr) 
-        {
-            TTF_Font* font = GetFont(filename, size);
-            mSurfaceText[key] =
-                Graphics::Instance()->GetSurfaceText(font, text, color);
-        }
-        if (mSurfaceText[key] != nullptr && managed) 
-        {
-            mSurfaceaceRefCount[mSurfaceText[key]] += 1;
-        }
-        return mSurfaceText[key];
-    }
+		if (mText[key] == nullptr) {
+			TTF_Font* font = GetFont(filename, size);
+			mText[key] = Graphics::Instance()->CreateTextTexture(font, text, color);
+		}
 
-    void AssetManager::DestroySurface(SDL_Surface* surface)
-    {
-        if (mSurfaceaceRefCount.find(surface) != mSurfaceaceRefCount.end()) 
-        {
-            mSurfaceaceRefCount[surface] -= 1;
-            if (mSurfaceaceRefCount[surface] == 0) 
-            {
-                for (auto elem : mSurfaceTextures) 
-                {
-                    if (elem.second == surface) 
-                    {
-                        SDL_FreeSurface(elem.second);
-                        mSurfaceTextures.erase(elem.first);
-                        return; // work finished, leave function
-                    }
-                }
-                for (auto elem : mSurfaceText) 
-                {
-                    if (elem.second == surface) 
-                    {
-                        SDL_FreeSurface(elem.second);
-                        mSurfaceText.erase(elem.first);
-                        return; // work finished, leave function
-                    }
-                }
-            }
-        }
-    }
+		if (mText[key] != nullptr && managed) {
+			mTextureRefCount[mText[key]] += 1;
+		}
 
-    ShaderUtil AssetManager::LoadShader(const GLchar* vShaderFile, const GLchar*
-        fShaderFile, const GLchar* gShaderFile, std::string name) {
-        shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
-        return shaders[name];
-    }
-    
-    ShaderUtil AssetManager::GetShader(std::string name) {
-        return shaders[name];
-    }
-    
-    ShaderUtil AssetManager::loadShaderFromFile(const GLchar * vShaderFile,
-            const GLchar * fShaderFile, const GLchar * gShaderFile /*= nullptr*/) {
-        // 1. Retrieve the vertex/fragment source code from filePath
-        std::string vertexCode;
-        std::string fragmentCode;
-        std::string geometryCode;
-        try {
-            // Open files
-            std::ifstream vertexShaderFile(vShaderFile);
-            std::ifstream fragmentShaderFile(fShaderFile);
-            std::stringstream vShaderStream, fShaderStream;
-            // Read file's buffer contents into streams
-            vShaderStream << vertexShaderFile.rdbuf();
-            fShaderStream << fragmentShaderFile.rdbuf();
-            // close file handlers
-            vertexShaderFile.close();
-            fragmentShaderFile.close();
-            // Convert stream into string
-            vertexCode = vShaderStream.str();
-            fragmentCode = fShaderStream.str();
-            // If geometry shader path is present, also load a geometry shader
-            if (gShaderFile != nullptr)
-            {
-                std::ifstream geometryShaderFile(gShaderFile);
-                std::stringstream gShaderStream;
-                gShaderStream << geometryShaderFile.rdbuf();
-                geometryShaderFile.close();
-                geometryCode = gShaderStream.str();
-            }
-        }
-        catch (std::exception e) {
-            std::cout << "ERROR::SHADER: Failed to read shader files" << std::endl;
-        }
-        const GLchar* vShaderCode = vertexCode.c_str();
-        const GLchar* fShaderCode = fragmentCode.c_str();
-        const GLchar* gShaderCode = geometryCode.c_str();
-        // 2. Now create shader object from source code
-        ShaderUtil shader;
-        shader.Compile(vShaderCode, fShaderCode, gShaderFile != nullptr ?
-            gShaderCode : nullptr);
-        return shader;
-    }
+		return mText[key];
+	}
+
+	SDL_Surface* AssetManager::GetSurface(std::string filename, bool managed) {
+		std::string fullPath = SDL_GetBasePath();
+		fullPath.append(filename);
+
+		if (mSurfaces[fullPath] == nullptr) {
+			mSurfaces[fullPath] = Graphics::Instance()->LoadSurface(fullPath);
+		}
+
+		if (mSurfaces[fullPath] != nullptr && managed) {
+			mSurfaceRefCount[mSurfaces[fullPath]] += 1;
+		}
+
+		return mSurfaces[fullPath];
+	}
+
+	SDL_Surface* AssetManager::GetTextSurface(std::string text, std::string filename, int size, SDL_Color color, bool managed) {
+		std::stringstream ss;
+		ss << size << (int)color.r << (int)color.g << (int)color.b;
+		std::string key = text + filename + ss.str();
+
+		if (mSurfaceText[key] == nullptr) {
+			TTF_Font* font = GetFont(filename, size);
+			mSurfaceText[key] = Graphics::Instance()->CreateTextSurface(font, text, color);
+		}
+
+		if (mSurfaceText[key] != nullptr && managed) {
+			mSurfaceRefCount[mSurfaceText[key]] += 1;
+		}
+
+		return mSurfaceText[key];
+	}
+
+	Mix_Music* AssetManager::GetMusic(std::string filename, bool managed) {
+		std::string fullPath = SDL_GetBasePath();
+		fullPath.append(filename);
+
+		if (mMusic[fullPath] == nullptr) {
+			mMusic[fullPath] = Mix_LoadMUS(fullPath.c_str());
+		}
+
+		if (mMusic[fullPath] == nullptr) {
+			std::cerr << "Unable to load music " << filename << "! Mix error: " << Mix_GetError() << std::endl;
+		}
+		else if (managed) {
+			mMusicRefCount[mMusic[fullPath]] += 1;
+		}
+
+		return mMusic[fullPath];
+	}
+
+	Mix_Chunk* AssetManager::GetSFX(std::string filename, bool managed) {
+		std::string fullPath = SDL_GetBasePath();
+		fullPath.append(filename);
+
+		if (mSFX[fullPath] == nullptr) {
+			mSFX[fullPath] = Mix_LoadWAV(fullPath.c_str());
+		}
+
+		if (mSFX[fullPath] == nullptr) {
+			std::cerr << "Unable to load SFX " << filename << "! Mix error: " << Mix_GetError() << std::endl;
+		}
+		else if (managed) {
+			mSFXRefCount[mSFX[fullPath]] += 1;
+		}
+
+		return mSFX[fullPath];
+	}
+
+	void AssetManager::LoadShader(const GLchar* vertShader, const GLchar* fragShader, const GLchar* geomShader, std::string name) {
+		std::string vFileContents;
+		std::string fFileContents;
+		std::string gFileContents;
+
+		try {
+			std::fstream vShaderFile(vertShader);
+			std::fstream fShaderFile(fragShader);
+			std::stringstream vBuffer;
+			std::stringstream fBuffer;
+
+			vBuffer << vShaderFile.rdbuf();
+			vShaderFile.close();
+			vFileContents = vBuffer.str();
+
+			fBuffer << fShaderFile.rdbuf();
+			fShaderFile.close();
+			fFileContents = fBuffer.str();
+
+			if (geomShader != nullptr) {
+				std::fstream gShaderFile(geomShader);
+				std::stringstream gBuffer;
+
+				gBuffer << gShaderFile.rdbuf();
+				gShaderFile.close();
+				gFileContents = gBuffer.str();
+			}
+
+			const GLchar* vShaderCode = vFileContents.c_str();
+			const GLchar* fShaderCode = fFileContents.c_str();
+			const GLchar* gShaderCode = gFileContents.c_str();
+
+			mShaders[name].Compile(vShaderCode, fShaderCode, geomShader != nullptr ? gShaderCode : nullptr);
+		}
+		catch (std::exception e) {
+			std::cerr << "Unable to read shader files for shader " << name << "!" << std::endl;
+		}
+	}
+
+	ShaderUtil AssetManager::GetShaderUtil(std::string name) {
+		if (mShaders.find(name) == mShaders.end()) {
+			std::cerr << "GetShaderUtil:: Unable to find shader " << name << "!" << std::endl;
+		}
+		return mShaders[name];
+	}
+
+	void AssetManager::DestroyTexture(SDL_Texture* texture) {
+		std::map<SDL_Texture*, unsigned>::iterator it = mTextureRefCount.find(texture);
+
+		if (it != mTextureRefCount.end()) {
+			it->second -= 1;
+			if (it->second == 0) {
+				UnloadTexture(it->first);
+				mTextureRefCount.erase(it->first);
+			}
+		}
+		else {
+			UnloadTexture(texture);
+		}
+	}
+
+	void AssetManager::DestroySurface(SDL_Surface* surface) {
+		std::map<SDL_Surface*, unsigned>::iterator it = mSurfaceRefCount.find(surface);
+
+		if (it != mSurfaceRefCount.end()) {
+			it->second -= 1;
+			if (it->second == 0) {
+				UnloadSurface(it->first);
+				mSurfaceRefCount.erase(it->first);
+			}
+		}
+		else {
+			UnloadSurface(surface);
+		}
+	}
+
+	void AssetManager::DestroyMusic(Mix_Music* music) {
+		std::map<Mix_Music*, unsigned>::iterator it = mMusicRefCount.find(music);
+
+		if (it != mMusicRefCount.end()) {
+			it->second -= 1;
+			if (it->second == 0) {
+				UnloadMusic(it->first);
+				mMusicRefCount.erase(it->first);
+			}
+		}
+		else {
+			UnloadMusic(music);
+		}
+	}
+
+	void AssetManager::DestroySFX(Mix_Chunk* sfx) {
+		std::map<Mix_Chunk*, unsigned>::iterator it = mSFXRefCount.find(sfx);
+
+		if (it != mSFXRefCount.end()) {
+			it->second -= 1;
+			if (it->second == 0) {
+				UnloadSFX(it->first);
+				mSFXRefCount.erase(it->first);
+			}
+		}
+		else {
+			UnloadSFX(sfx);
+		}
+	}
 }

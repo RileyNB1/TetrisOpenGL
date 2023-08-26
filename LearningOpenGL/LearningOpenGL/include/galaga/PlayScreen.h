@@ -8,7 +8,7 @@
 #include <Level.h>
 #include <Player.h>
 
-using namespace sdlFr;
+using namespace FOGrP;
 
 namespace Galaga
 {

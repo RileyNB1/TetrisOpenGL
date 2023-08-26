@@ -1,6 +1,6 @@
 #include <BoxCollider.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     void BoxCollider::AddVert(int index, Vector2 pos)
     {
@@ -18,7 +18,7 @@ namespace sdlFr
 
         if (DEBUG_COLLIDERS)
         {
-            SetDebugTexture(new SDLTexture("BoxCollider.png"));
+            SetDebugTexture(new GLTexture("BoxCollider.png"));
             mDebugTexture->Scale(size);
         }
     }

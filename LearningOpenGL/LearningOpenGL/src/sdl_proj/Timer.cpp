@@ -1,6 +1,6 @@
 #include <Timer.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     Timer* Timer::sInstance = nullptr;
 

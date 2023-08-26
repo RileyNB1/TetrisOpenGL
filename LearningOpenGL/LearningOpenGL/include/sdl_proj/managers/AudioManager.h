@@ -2,7 +2,7 @@
 
 #include <managers/AssetManager.h> 
 
-namespace sdlFr
+namespace FOGrP
 {
     class AudioManager
     {

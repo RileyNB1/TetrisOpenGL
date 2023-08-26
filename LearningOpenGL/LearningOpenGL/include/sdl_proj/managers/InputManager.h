@@ -4,7 +4,7 @@
 #include <MathHelper.h>
 #include <cstring>
 
-namespace sdlFr
+namespace FOGrP
 {
     class InputManager
     {

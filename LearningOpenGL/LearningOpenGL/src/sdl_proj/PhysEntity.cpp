@@ -1,7 +1,7 @@
 #include <PhysEntity.h>
 #include <managers/PhysicsManager.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     void PhysEntity::AddCollider(Collider* collider, Vector2 localPos)
     {

@@ -5,51 +5,55 @@
 #include <iostream>
 #include <SDL_ttf.h>
 
-namespace sdlFr
+namespace FOGrP
 {
-    class Graphics
-    {
-    public:
-        static const short SCREEN_WIDTH = 800;
-        static const short SCREEN_HEIGHT = 600;
+	class Texture;
+	class Graphics
+	{
+	public:
+		enum class RenderMode {
+			SDL,
+			GL
+		};
 
-        static Graphics* Instance();
-        static void Release();
-        static bool Initialized();
+		static const short SCREEN_WIDTH = 1024;
+		static const short SCREEN_HEIGHT = 896;
+		const char* WINDOW_TITLE = "Galaga";
 
-        void virtual ClearBackBuffer() = 0;
-        void virtual Render() = 0;
+	protected:
+		static Graphics* sInstance;
+		static bool sInitialized;
+		static RenderMode sMode;
 
-        SDL_Texture* LoadTexture(std::string path);
-        
-        virtual void DrawTexture(SDL_Texture* tex,
-            SDL_Rect* srcRect = nullptr,
-            SDL_Rect* dstRect = nullptr,
-            float angle = 0.0f,
-            SDL_RendererFlip flip = SDL_FLIP_NONE);
+		SDL_Window* mWindow;
+		SDL_Renderer* mRenderer;
 
-        SDL_Texture* CreateTextTexture(TTF_Font* font,
-            std::string text,
-            SDL_Color color);
+		SDL_GLContext mGLContext;
 
-        void DrawLine(float startX, float startY, float endX, float endY);
-        void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+	public:
+		static void SetMode(RenderMode mode);
+		static Graphics* Instance();
+		static void Release();
+		static bool Initialized();
 
-        SDL_Surface* GetSurfaceText(TTF_Font* font, std::string text,
-            SDL_Color color); 
-        
-        SDL_Surface* GetSurfaceTexture(std::string path);
+		SDL_Texture* LoadTexture(std::string path);
+		SDL_Surface* LoadSurface(std::string path);
+		SDL_Texture* CreateTextTexture(TTF_Font* font, std::string text, SDL_Color color);
+		SDL_Surface* CreateTextSurface(TTF_Font* font, std::string text, SDL_Color color);
 
-    protected:
-        static Graphics* sInstance;
-        static bool sInitialized;
+		virtual void DrawSprite(Texture* texture, SDL_Rect* srcRect = nullptr, SDL_Rect* dstRect = nullptr, float angle = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
+		
+		virtual void DrawTexture(SDL_Texture* texture, SDL_Rect* srcRect = nullptr, SDL_Rect* dstRect = nullptr, float angle = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
+		
+		void DrawLine(float startX, float startY, float endX, float endY);
 
-        SDL_Window* mWindow;
-        SDL_Renderer* mRenderer; 
-        SDL_GLContext glContext;
+		virtual void ClearBackBuffer();
+		virtual void Render();
 
-        Graphics();
-        ~Graphics();
-        bool virtual Init();
-    };
+	protected:
+		Graphics();
+		~Graphics();
+
+		virtual bool Init();
+	};
 }

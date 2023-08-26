@@ -3,7 +3,7 @@
 #include <random>
 #include <chrono>
 
-namespace sdlFr
+namespace FOGrP
 {
     class Random
     {

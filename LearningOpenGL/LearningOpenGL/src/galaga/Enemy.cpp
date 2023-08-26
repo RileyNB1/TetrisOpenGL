@@ -1,6 +1,9 @@
 #pragma once
 
 #include <Enemy.h>
+#include <GLGraphics.h>
+
+using namespace FOGrP;
 
 typedef Galaga::Formation Swarm;
 
@@ -18,7 +21,7 @@ namespace Galaga
 
     void Enemy::CreatePaths()
     {
-        int screenMidPoint = (int)(Graphics::Instance()->SCREEN_WIDTH * 0.4f);
+        int screenMidPoint = (int)(GLGraphics::Instance()->SCREEN_WIDTH * 0.4f);
         int currentPath = 0;
 
         BezierPath* path = new BezierPath();
@@ -137,7 +140,7 @@ namespace Galaga
 
         for (unsigned i = 0; i < sPaths[mCurrentPath].size() - 1; ++i)
         {
-            Graphics::Instance()->DrawLine(
+            GLGraphics::Instance()->DrawLine(
                 sPaths[mCurrentPath][i].x,
                 sPaths[mCurrentPath][i].y,
                 sPaths[mCurrentPath][i + 1].x,
@@ -152,7 +155,7 @@ namespace Galaga
 
         for (unsigned i = 0; i < sPaths[mCurrentPath].size() - 1; ++i)
         {
-            Graphics::Instance()->DrawLine(
+            GLGraphics::Instance()->DrawLine(
                 sPaths[mCurrentPath][i].x,
                 sPaths[mCurrentPath][i].y,
                 sPaths[mCurrentPath][i + 1].x,

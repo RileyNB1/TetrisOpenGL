@@ -1,13 +1,13 @@
 #include <AnimatedTexture.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     AnimatedTexture::AnimatedTexture(std::string filename,
         int x, int y, int w, int h,
         int frameCount, float animationSpeed,
         AnimDir animationDir, bool managed) :
 
-        SDLTexture(filename, x, y, w, h, managed)
+        GLTexture(filename, x, y, w, h, managed)
     {
         mTimer = Timer::Instance();
         mStartX = x;

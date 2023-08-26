@@ -1,14 +1,16 @@
 #pragma once
 
-#include <SDLTexture.h> 
+#include <GLTexture.h> 
 #include <Timer.h> 
 
-namespace sdlFr 
+using namespace FOGrP;
+
+namespace FOGrP
 {
     enum WrapMode { Once = 0, Loop = 1 };
     enum AnimDir { Horizontal = 0, Vertical = 1 };
 
-    class AnimatedTexture : public SDLTexture
+    class AnimatedTexture : public GLTexture
     {
     protected: 
         Timer* mTimer; 

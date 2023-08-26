@@ -153,9 +153,6 @@
     <ClCompile Include="src\sdl_proj\SDLGraphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\sdl_proj\SDLTexture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\sdl_proj\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -315,9 +312,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\sdl_proj\SDLMain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\sdl_proj\SDLTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\sdl_proj\Texture.h">

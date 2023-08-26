@@ -1,8 +1,8 @@
 #pragma once
 
-#include <SDLTexture.h>
+#include <GLTexture.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     class Collider : public GameEntity 
     {
@@ -24,8 +24,8 @@ namespace sdlFr
 
         static const bool DEBUG_COLLIDERS = true; 
         
-        sdlFr::SDLTexture* mDebugTexture;
+        GLTexture* mDebugTexture;
         
-        void SetDebugTexture(SDLTexture* tex);
+        void SetDebugTexture(GLTexture* tex);
     };
 }

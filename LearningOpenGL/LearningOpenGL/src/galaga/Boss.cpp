@@ -2,6 +2,9 @@
 
 #include <Boss.h>
 #include <Random.h>
+#include <GLTexture.h>
+
+using namespace FOGrP;
 
 namespace Galaga
 {
@@ -26,14 +29,14 @@ namespace Galaga
 
     Boss::Boss(int path, int index, bool challenge) : Enemy(path, index, challenge)
     {
-        mTexture = new Texture("Bosses.png", 0, 0, 64, 64);
+        mTexture = new GLTexture("Bosses.png", 0, 0, 64, 64);
 
         mTexture->Parent(this);
         mTexture->Position(Vec2_Zero);
         mType = Enemy::Boss;
 
-        mTextures[0] = new Texture("Bosses.png", 0, 0, 64, 64);
-        mTextures[1] = new Texture("Bosses.png", 64, 0, 64, 64);
+        mTextures[0] = new GLTexture("Bosses.png", 0, 0, 64, 64);
+        mTextures[1] = new GLTexture("Bosses.png", 64, 0, 64, 64);
 
         for (int i = 0; i < 2; i++)
         {

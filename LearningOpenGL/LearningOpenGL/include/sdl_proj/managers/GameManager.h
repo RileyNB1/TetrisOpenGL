@@ -1,9 +1,8 @@
 #pragma once
 
-#include <Graphics.h> 
+#include <GLGraphics.h> 
 #include <Timer.h>
 #include <GameEntity.h>
-#include <SDLTexture.h>
 #include <managers/AssetManager.h>
 #include <managers/InputManager.h>
 #include <AnimatedTexture.h>
@@ -13,7 +12,7 @@
 
 using namespace Galaga;
 
-namespace sdlFr
+namespace FOGrP
 {
     class GameManager
     {

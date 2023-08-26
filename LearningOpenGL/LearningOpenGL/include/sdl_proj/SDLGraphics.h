@@ -2,7 +2,7 @@
 
 #include <Graphics.h>
 
-namespace sdlFr
+namespace FOGrP
 {
 	class SDLGraphics : public Graphics 
 	{

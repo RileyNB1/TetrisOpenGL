@@ -78,13 +78,13 @@ namespace Galaga
 
     Butterfly::Butterfly(int path, int index, bool challenge) : Enemy(path, index, challenge)
     {
-        mTexture = new Texture("AnimatedEnemies.png", 0, 0, 52, 40);
+        mTexture = new GLTexture("AnimatedEnemies.png", 0, 0, 52, 40);
         mTexture->Parent(this);
         mTexture->Position(Vec2_Zero);
         mType = Enemy::Butterfly;
 
-        mTextures[0] = new Texture("AnimatedEnemies.png", 0, 0, 52, 40);
-        mTextures[1] = new Texture("AnimatedEnemies.png", 52, 0, 52, 40);
+        mTextures[0] = new GLTexture("AnimatedEnemies.png", 0, 0, 52, 40);
+        mTextures[1] = new GLTexture("AnimatedEnemies.png", 52, 0, 52, 40);
 
         for (int i = 0; i < 2; i++)
         {

@@ -3,7 +3,7 @@
 #include <vector>
 #include <Collider.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     class PhysEntity : public GameEntity
     {

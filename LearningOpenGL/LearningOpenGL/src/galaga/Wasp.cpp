@@ -139,13 +139,13 @@ namespace Galaga
         Enemy(path, index, challenge), 
         mDiver(diver) 
     { 
-        mTexture = new Texture("AnimatedEnemies.png", 0, 40, 52, 40); 
+        mTexture = new GLTexture("AnimatedEnemies.png", 0, 40, 52, 40); 
         mTexture->Parent(this); 
         mTexture->Position(Vec2_Zero); 
         mType = Enemy::Wasp; 
 
-        mTextures[0] = new Texture("AnimatedEnemies.png", 0, 40, 52, 40); 
-        mTextures[1] = new Texture("AnimatedEnemies.png", 52, 40, 52, 40); 
+        mTextures[0] = new GLTexture("AnimatedEnemies.png", 0, 40, 52, 40); 
+        mTextures[1] = new GLTexture("AnimatedEnemies.png", 52, 40, 52, 40); 
         
         for (int i = 0; i < 2; i++) 
         { 

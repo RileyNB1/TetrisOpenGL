@@ -1,6 +1,6 @@
 #include <managers/GameManager.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     GameManager* GameManager::sInstance = nullptr;
 
@@ -85,7 +85,12 @@ namespace sdlFr
         // create Graphics singleton 
         mEvent = {};
 
+        Graphics::SetMode(Graphics::RenderMode::GL);
         mGraphics = Graphics::Instance();
+
+        if (!Graphics::Initialized()) {
+            mQuit = true;
+        }
         mTimer = Timer::Instance();
         mInputManager = InputManager::Instance();
         mAudioManager = AudioManager::Instance();

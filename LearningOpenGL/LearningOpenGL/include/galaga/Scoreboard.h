@@ -3,7 +3,7 @@
 #include <Texture.h>
 #include <vector>
 
-using namespace sdlFr;
+using namespace FOGrP;
 
 namespace Galaga
 {

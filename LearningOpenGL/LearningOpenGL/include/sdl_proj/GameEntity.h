@@ -2,7 +2,7 @@
 
 #include <MathHelper.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     class GameEntity
     {

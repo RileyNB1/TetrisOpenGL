@@ -1,6 +1,6 @@
 #include <GameEntity.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     GameEntity::GameEntity(float x, float y) :
         mPosition(x, y),

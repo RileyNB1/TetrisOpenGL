@@ -2,7 +2,7 @@
 
 #include <Bullet.h>
 
-using namespace sdlFr;
+using namespace FOGrP;
 
 namespace Galaga
 {
@@ -10,7 +10,7 @@ namespace Galaga
     {
         mTimer = Timer::Instance();
 
-        mTexture = new Texture("Bullet.png");
+        mTexture = new GLTexture("Bullet.png");
         mTexture->Parent(this);
         mTexture->Position(Vec2_Zero);
         mSpeed = 200;

@@ -1,6 +1,6 @@
 #include <managers/InputManager.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     InputManager* InputManager::sInstance = nullptr;
 

@@ -1,6 +1,6 @@
 #include <Random.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     Random* Random::sInstance = nullptr;
 

@@ -5,38 +5,34 @@
 #include <GameEntity.h>
 #include <Graphics.h>
 
-namespace sdlFr
+namespace FOGrP
 {
-    class Texture : public GameEntity
-    {
-    protected:
+	class Texture : public GameEntity {
+	protected:
+		SDL_Texture* mTex;
+		Graphics* mGraphics;
 
-        SDL_Rect mSourceRect;
-        SDL_Rect mDestinationRect;
-        int mWidth; int mHeight;
-        Graphics* mGraphics;
+		int mWidth;
+		int mHeight;
 
-        bool mClipped;
+		bool mClipped;
+		SDL_Rect mSourceRect;
+		SDL_Rect mDestinationRect;
 
-    public:
-        SDL_Texture* mTex;
-        Texture(std::string filename, bool managed = false);
+	public:
+		Texture(std::string filename, bool managed = true);
+		Texture(std::string filename, int x, int y, int w, int h, bool managed = true);
+		Texture(std::string text, std::string fontPath, int size, SDL_Color color, bool managed = true);
+		virtual ~Texture();
 
-        Texture(std::string filename,
-            int x, int y, int w, int h,
-            bool managed = false);
+		Vector2 ScaledDimensions();
 
-        Texture(std::string text,
-            std::string fontPath,
-            int size,
-            SDL_Color color,
-            bool managed = false);
+		void SetSourceRect(SDL_Rect* sourceRect);
 
-        virtual ~Texture();
+		virtual void Render() override;
 
-        Vector2 ScaledDimensions();
-        void SetSourceRect(SDL_Rect* sourceRect);
-        void Render() override;
-    };
+	protected:
+		void UpdateDstRect();
+	};
 }
 

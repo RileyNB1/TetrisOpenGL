@@ -1,6 +1,6 @@
 #include <CircleCollider.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     CircleCollider::CircleCollider(float radius, bool broadPhase) :
         Collider(ColliderType::Circle)
@@ -11,16 +11,16 @@ namespace sdlFr
         {
             if (broadPhase)
             {
-                SetDebugTexture(new SDLTexture("BroadPhaseCollider.png"));
+                SetDebugTexture(new GLTexture("BroadPhaseCollider.png"));
             }
             else
             {
-                SetDebugTexture(new SDLTexture("CircleCollider.png"));
+                SetDebugTexture(new GLTexture("CircleCollider.png"));
             }
 
             // circle collider file size is 50px 
 
-            mDebugTexture->Scale(Vec2_One * (radius * 2 / sdlFr::DEBUG_IMAGE_SIZE));
+            mDebugTexture->Scale(Vec2_One * (radius * 2 / DEBUG_IMAGE_SIZE));
         }
     }
 

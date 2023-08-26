@@ -2,7 +2,7 @@
 #include <OpenGLApp.h>
 #include <managers/GameManager.h>
 
-using namespace sdlFr;
+using namespace FOGrP;
 
 int main()
 {

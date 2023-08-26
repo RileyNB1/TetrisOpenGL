@@ -8,7 +8,7 @@
 #include <Timer.h>
 #include <BezierPath.h>
 
-using namespace sdlFr;
+using namespace FOGrP;
 
 typedef Galaga::Formation Swarm;
 
@@ -32,8 +32,8 @@ namespace Galaga
 
         Timer* mTimer;
         
-        Texture* mTexture;
-        Texture* mTextures[2];
+        GLTexture* mTexture;
+        GLTexture* mTextures[2];
 
         States mCurrentState;
         unsigned mCurrentPath;

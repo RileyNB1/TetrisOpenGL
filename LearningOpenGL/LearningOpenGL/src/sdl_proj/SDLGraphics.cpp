@@ -1,6 +1,6 @@
 #include <SDLGraphics.h>
 
-namespace sdlFr
+namespace FOGrP
 {
 	SDLGraphics* SDLGraphics::Instance()
 	{

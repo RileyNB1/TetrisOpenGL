@@ -4,36 +4,34 @@
 #include <GLTexture.h>
 #include <ShaderUtil.h>
 
-using namespace sdlFr;
 
 namespace FOGrP
 {
-	class GLGraphics : public Graphics
-	{
+	class GLGraphics
+		: public Graphics {
+		friend class Graphics;
+
 	private:
-		SDL_GLContext glContext; 
-		
-		glm::mat4 orthoMatrix;
-
-	protected:
-		virtual bool Init() override; 
-		
-		void InitLoadShaderData();
-
+		SDL_GLContext mGLContext;
 		ShaderUtil shaderUtil;
 
+		glm::mat4 orthoMatrix;
+
 	public:
-		static GLGraphics* Instance();
-		GLGraphics();
-		~GLGraphics();
+		void InitRenderData(Texture* texture, SDL_Rect* srcRect, GLuint quadVAO);
+		void InitLoadShaderData();
+
+		// Inherited from Graphics
+		virtual void DrawSprite(Texture* texture, SDL_Rect* srcRect = nullptr, SDL_Rect* dstRect = nullptr, float angle = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE) override;
 
 		virtual void ClearBackBuffer() override;
-		virtual void Render() override; 
+		virtual void Render() override;
 
-		void DrawSprite(GLTexture& texture, SDL_Rect* srcRect, SDL_Rect* dstRect,
-			float angle, SDL_RendererFlip flip);
+	private:
+		//Inherited from Graphics
+		virtual bool Init() override;
 
-		void InitRenderData(Texture* texture, SDL_Rect* srcRect, float angle, float x,
-			float y, float w, float h, GLuint quadVAO);
+		GLGraphics();
+		~GLGraphics();
 	};
 }

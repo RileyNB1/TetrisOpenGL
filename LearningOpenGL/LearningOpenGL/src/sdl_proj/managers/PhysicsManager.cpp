@@ -1,6 +1,6 @@
 #include <managers/PhysicsManager.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     PhysicsManager* PhysicsManager::sInstance = nullptr;
 

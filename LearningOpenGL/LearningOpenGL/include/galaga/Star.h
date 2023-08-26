@@ -3,7 +3,7 @@
 #include <Timer.h>
 #include <Random.h>
 
-using namespace sdlFr;
+using namespace FOGrP;
 
 namespace Galaga
 {

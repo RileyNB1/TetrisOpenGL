@@ -12,9 +12,9 @@ namespace Galaga
         //empty holder
         mTopBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, 80.0f);
 
-        mPlayerOne = new SDLTexture("1UP", "emulogic.ttf", 32, { 200, 0, 0 });
-        mPlayerTwo = new SDLTexture("2UP", "emulogic.ttf", 32, { 200, 0, 0 });
-        mHiScore = new SDLTexture("HI SCORE", "emulogic.ttf", 32, { 200, 0, 0 });
+        mPlayerOne = new GLTexture("1UP", "emulogic.ttf", 32, { 200, 0, 0 });
+        mPlayerTwo = new GLTexture("2UP", "emulogic.ttf", 32, { 200, 0, 0 });
+        mHiScore = new GLTexture("HI SCORE", "emulogic.ttf", 32, { 200, 0, 0 });
 
         mTopBar->Parent(this);
 
@@ -30,9 +30,9 @@ namespace Galaga
 
         mPlayModes = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f,
             Graphics::SCREEN_HEIGHT * 0.55f);
-        mOnePlayerMode = new SDLTexture("1 Player ", "emulogic.ttf", 32, { 230, 230, 230 });
-        mTwoPlayerMode = new SDLTexture("2 Players", "emulogic.ttf", 32, { 230, 230, 230 });
-        mCursor = new SDLTexture("Cursor.png");
+        mOnePlayerMode = new GLTexture("1 Player ", "emulogic.ttf", 32, { 230, 230, 230 });
+        mTwoPlayerMode = new GLTexture("2 Players", "emulogic.ttf", 32, { 230, 230, 230 });
+        mCursor = new GLTexture("Cursor.png");
 
         mPlayModes->Parent(this);
 
@@ -52,9 +52,9 @@ namespace Galaga
         mBottomBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f,
             Graphics::SCREEN_HEIGHT * 0.7f);
 
-        mNamco = new SDLTexture("namcot", "namco__.ttf", 36, { 200, 0, 0 });
-        mDates = new SDLTexture("1981 1985 NAMCO LTD.", "emulogic.ttf", 32, { 230, 230, 230 });
-        mRights = new SDLTexture("ALL RIGHTS RESERVED", "emulogic.ttf", 32, { 230, 230, 230 });
+        mNamco = new GLTexture("namcot", "namco__.ttf", 36, { 200, 0, 0 });
+        mDates = new GLTexture("1981 1985 NAMCO LTD.", "emulogic.ttf", 32, { 230, 230, 230 });
+        mRights = new GLTexture("ALL RIGHTS RESERVED", "emulogic.ttf", 32, { 230, 230, 230 });
 
         mBottomBar->Parent(this);
 
@@ -67,7 +67,7 @@ namespace Galaga
         mRights->Position(0.0f, 170.0f);
 
         //*******************************************************************
-        mLogo = new SDLTexture("GalagaLogo.png");
+        mLogo = new GLTexture("GalagaLogo.png");
         mLogo->Parent(this);
         mLogo->Position(mPlayModes->Position(World) - Vector2(0, 100));
         mLogo->Scale(Vector2(0.4f, 0.4f));

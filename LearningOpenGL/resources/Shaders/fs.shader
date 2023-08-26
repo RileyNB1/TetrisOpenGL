@@ -11,5 +11,5 @@ uniform sampler2D tSampler;
 void main()
 {
     vec4 imageTexture = texture(tSampler, fragmentUV);
-    color = imageTexture * fragmentColor;
+    color = /*imageTexture * */fragmentColor;
 }

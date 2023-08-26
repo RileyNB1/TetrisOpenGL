@@ -3,200 +3,153 @@
 
 namespace FOGrP
 {
-	GLGraphics::GLGraphics() : Graphics() 
-	{
-		sInitialized = Init();
-	}
-	
-	GLGraphics::~GLGraphics() 
-	{
-		SDL_GL_DeleteContext(mWindow);
-	}
+	void GLGraphics::DrawSprite(Texture* texture, SDL_Rect* srcRect, SDL_Rect* dstRect, float angle, SDL_RendererFlip flip) {
+		float rad = angle * DEG_TO_RAD;
 
-	void GLGraphics::ClearBackBuffer()
-	{
-		glClearDepth(1.0);
-		//clear the color and depth buffer
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	}
+		GLTexture* gltex = dynamic_cast<GLTexture*>(texture);
 
-	void GLGraphics::Render()
-	{
-		//Draw the triangle
-		/*glBegin(GL_TRIANGLES);
-		glColor3f(1.0f, 0.0f, 0.0f);
-		glVertex2f(0.0f, 0.0f);
-		glVertex2f(0.0f, -1.0f);
-		glVertex2f(-1.0f, -1.0f);
-		glEnd();
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		
-		SDL_GL_SwapWindow(mWindow);*/
-	}
+		Vector2 pos = texture->Position(GameEntity::Space::World);
 
-	void GLGraphics::DrawSprite(GLTexture& texture, SDL_Rect* srcRect, SDL_Rect* dstRect,
-		float angle, SDL_RendererFlip flip)
-	{
-		//float x = -1; //xPos
-		//float y = -1; //yPos
-		//float w = 1; //Width
-		//float h = 1; //Height
+		InitRenderData(texture, srcRect, gltex->ID);
 
-		//if (texture.ID == 0)
-		//{
-		//	glGenBuffers(1, &(texture.ID));
-		//}
-
-		//float vertexData[12];
-		////First triangle
-		//vertexData[0] = x + w;
-		//vertexData[1] = y + h;
-		//vertexData[2] = x;
-		//vertexData[3] = y + h;
-		//vertexData[4] = x;
-		//vertexData[5] = y;
-		////Second Triangle
-		//vertexData[6] = x;
-		//vertexData[7] = y;
-		//vertexData[8] = x + w;
-		//vertexData[9] = y;
-		//vertexData[10] = x + w;
-		//vertexData[11] = y + h;
-
-		//glBindBuffer(GL_ARRAY_BUFFER, texture.ID);
-		//glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
-		//glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-		//glEnableVertexAttribArray(0);
-		//glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-		//glDrawArrays(GL_TRIANGLES, 0, 6);
-		//glDisableVertexAttribArray(0);
-
-		InitRenderData(&texture, srcRect, angle * DEG_TO_RAD,dstRect->x, dstRect->y, dstRect->w, dstRect->h,
-			texture.ID);
 		shaderUtil.Use();
-		glGenBuffers(1, &texture.ID);
+		glBindTexture(GL_TEXTURE_2D, gltex->ID);
 
 		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		
-		GLint location = shaderUtil.GetUniformLocation("tSampler");
-		glUniform1i(location, 0);
-		location = shaderUtil.GetUniformLocation("proj");
-		glUniformMatrix4fv(location, 1, GL_FALSE, &(orthoMatrix[0][0]));
+		glm::mat4 modelMatrix = glm::mat4(1.0);
+		glm::mat4 scaleMatrix = glm::scale(modelMatrix, glm::vec3(dstRect->w, dstRect->h, 1.0f));
+		glm::mat4 rotateMatrix = glm::rotate(modelMatrix, rad, glm::vec3(0.0f, 0.0f, 1.0f));
+		glm::mat4 translateMatrix = glm::translate(modelMatrix, glm::vec3(pos.x, pos.y, 0.0f));
 
-		glBindBuffer(GL_ARRAY_BUFFER, texture.ID);
+		GLint loc = shaderUtil.GetUniformLocation("tSampler");
+		glUniform1i(loc, 0);
+
+		loc = shaderUtil.GetUniformLocation("scaleMatrix");
+		glUniformMatrix4fv(loc, 1, GL_FALSE, &(scaleMatrix[0][0]));
+		loc = shaderUtil.GetUniformLocation("rotateMatrix");
+		glUniformMatrix4fv(loc, 1, GL_FALSE, &(rotateMatrix[0][0]));
+		loc = shaderUtil.GetUniformLocation("translateMatrix");
+		glUniformMatrix4fv(loc, 1, GL_FALSE, &(translateMatrix[0][0]));
+
+		loc = shaderUtil.GetUniformLocation("proj");
+		glUniformMatrix4fv(loc, 1, GL_FALSE, &(orthoMatrix[0][0]));
+
+		glBindBuffer(GL_ARRAY_BUFFER, gltex->ID);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glEnableVertexAttribArray(2);
 
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-			(void*)offsetof(Vertex, position));
-		glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex),
-			(void*)offsetof(Vertex, color));
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-			(void*)offsetof(Vertex, uv));
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(2);
+
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	
-	bool GLGraphics::Init()
-	{
-		if (!Graphics::Init())
-		{
+
+	void GLGraphics::InitRenderData(Texture* texture, SDL_Rect* srcRect, GLuint quadVAO) {
+		GLTexture* glTexture = dynamic_cast<GLTexture*>(texture);
+
+		if (glTexture == nullptr) {
+			std::cerr << "InitRenderData:: Unable to cast input texture to GLTexture pointer." << std::endl;
+			return;
+		}
+
+		float height = (float)glTexture->Surface->h;
+		float width = (float)glTexture->Surface->w;
+
+		if (quadVAO == 0) {
+			glGenBuffers(1, &quadVAO);
+		}
+
+		glm::vec2 topRight = glm::vec2(1, 1);
+		glm::vec2 topLeft = glm::vec2(0, 1);
+		glm::vec2 bottomLeft = glm::vec2(0, 0);
+		glm::vec2 bottomRight = glm::vec2(1, 0);
+
+		if (srcRect != nullptr) {
+			topRight = glm::vec2((srcRect->x + srcRect->w) / width, (srcRect->y + srcRect->h) / height);
+			topLeft = glm::vec2(srcRect->x / width, (srcRect->y + srcRect->h) / height);
+			bottomLeft = glm::vec2(srcRect->x / width, srcRect->y / height);
+			bottomRight = glm::vec2((srcRect->x + srcRect->w) / width, srcRect->y / height);
+		}
+
+		Vertex vertData[6];
+		vertData[0].SetPosition(0.5f, 0.5f);
+		vertData[0].SetUV(topRight.x, topRight.y);
+
+		vertData[1].SetPosition(-0.5f, 0.5f);
+		vertData[1].SetUV(topLeft.x, topLeft.y);
+
+		vertData[2].SetPosition(-0.5f, -0.5f);
+		vertData[2].SetUV(bottomLeft.x, bottomLeft.y);
+
+		vertData[3].SetPosition(-0.5f, -0.5f);
+		vertData[3].SetUV(bottomLeft.x, bottomLeft.y);
+
+		vertData[4].SetPosition(0.5f, -0.5f);
+		vertData[4].SetUV(bottomRight.x, bottomRight.y);
+
+		vertData[5].SetPosition(0.5f, 0.5f);
+		vertData[5].SetUV(topRight.x, topRight.y);
+
+		for (int i = 0; i < 6; i++) {
+			vertData[i].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+		}
+
+		glBindBuffer(GL_ARRAY_BUFFER, quadVAO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertData), vertData, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+
+	void GLGraphics::InitLoadShaderData() {
+		std::string basePath = SDL_GetBasePath();
+		//basePath.append("");
+
+		std::string vShaderPath = basePath + "vs.shader";
+		std::string fShaderPath = basePath + "fs.shader";
+
+		AssetManager::Instance()->LoadShader(vShaderPath.c_str(), fShaderPath.c_str(), nullptr, "Sprite-Default");
+		shaderUtil = AssetManager::Instance()->GetShaderUtil("Sprite-Default");
+		orthoMatrix = glm::ortho(0.0f, (float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f, -1.0f, 1.0f);
+
+		shaderUtil.Use();
+		shaderUtil.SetVector2f("vertexPosition", glm::vec2(0, 0));
+		shaderUtil.SetMatrix4f("proj", orthoMatrix);
+	}
+
+	void GLGraphics::ClearBackBuffer() {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
+
+	void GLGraphics::Render() {
+		SDL_GL_SwapWindow(mWindow);
+	}
+
+	bool GLGraphics::Init() {
+		if (!sInitialized) {
 			return false;
 		}
-		glContext = SDL_GL_CreateContext(mWindow);
-		
-		if (glContext == nullptr) 
-		{
-			std::cerr << "SDL_GL context could not be created!" <<
-				SDL_GetError() << std::endl;
-		}
-		GLenum error = glewInit();
-		if (error != GLEW_OK) {
-			std::cerr << "Could not initialize glew!" <<
-				glewGetErrorString(error) << std::endl;
-		}
-		//Enables a double buffer window - removes flickering.
-		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-		glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
 
 		InitLoadShaderData();
 
 		return true;
 	}
 
-	void GLGraphics::InitLoadShaderData()
-	{
-		shaderUtil = AssetManager::LoadShader("vs.shader", "fs.shader", nullptr,
-			"sprite");
-		orthoMatrix = glm::ortho(0.0f, (float)SCREEN_WIDTH,
-			(float)SCREEN_HEIGHT, 0.0f, -1.0f, 1.0f);
-		AssetManager::GetShader("sprite").Use().SetVector2f("vertexPosition",
-			glm::vec2(0, 0));
-		AssetManager::GetShader("sprite").SetMatrix4f("proj", orthoMatrix);
+	GLGraphics::GLGraphics() {
+		sInitialized = Init();
 	}
 
-	GLGraphics* GLGraphics::Instance()
-	{
-		if (sInstance == nullptr) 
-		{
-			sInstance = new GLGraphics();
-		}
-		return static_cast<GLGraphics*>(sInstance);
-	}
+	GLGraphics::~GLGraphics() {
 
-	void GLGraphics::InitRenderData(Texture* texture, SDL_Rect* srcRect, float angle,
-		float x, float y, float w, float h, GLuint quadVAO) {
-		GLTexture* glTex = dynamic_cast<GLTexture*>(texture);
-		if (!glTex) {
-			std::cout << "TEXTURE ERROR" << std::endl;
-			return;
-		}
-		float height = glTex->mSurface->h;
-		float width = glTex->mSurface->w;
-		if (quadVAO == 0)
-		{
-			glGenBuffers(1, &quadVAO);
-		}
-		
-		glm::vec2 topRight = glm::vec2(1, 1);
-		glm::vec2 topLeft = glm::vec2(0, 1);
-		glm::vec2 BottomLeft = glm::vec2(0, 0);
-		glm::vec2 BottomRight = glm::vec2(1, 0);
-		
-		if (srcRect) 
-		{
-			topRight = glm::vec2((srcRect->x + srcRect->w) / width,
-				(srcRect->y + srcRect->h) / height);
-			topLeft = glm::vec2(srcRect->x / width, (srcRect->y + srcRect->h) / height);
-			BottomLeft = glm::vec2(srcRect->x / width, (srcRect->y) / height);
-			BottomRight = glm::vec2((srcRect->x + srcRect->w) / width,
-				(srcRect->y) / height);
-		}
-		Vertex vertexData[6];
-
-		vertexData[0].SetPosition(x + w, y + h);
-		vertexData[0].SetUV(topRight.x, topRight.y);
-		vertexData[1].SetPosition(x, y + h);
-		vertexData[1].SetUV(topLeft.x, topLeft.y);
-		vertexData[2].SetPosition(x, y);
-		vertexData[2].SetUV(BottomLeft.x, BottomLeft.y);
-		vertexData[3].SetPosition(x, y);
-		vertexData[3].SetUV(BottomLeft.x, BottomLeft.y);
-		vertexData[4].SetPosition(x + w, y);
-		vertexData[4].SetUV(BottomRight.x, BottomRight.y);
-		vertexData[5].SetPosition(x + w, y + h);
-		vertexData[5].SetUV(topRight.x, topRight.y);
-		glBindBuffer(GL_ARRAY_BUFFER, quadVAO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
 }

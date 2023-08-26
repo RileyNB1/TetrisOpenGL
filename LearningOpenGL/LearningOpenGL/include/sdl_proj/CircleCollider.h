@@ -2,7 +2,7 @@
 
 #include <Collider.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     const float DEBUG_IMAGE_SIZE = 50;
 

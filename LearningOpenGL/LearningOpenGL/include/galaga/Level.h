@@ -11,7 +11,7 @@
 #include "tinyxml/tinyxml2.h" 
 
 using namespace tinyxml2;
-using namespace sdlFr;
+using namespace FOGrP;
 
 namespace Galaga
 {
@@ -37,11 +37,11 @@ namespace Galaga
         bool mStageStarted;
 
         float mLabelTimer;
-        Texture* mStageLabel;
+        GLTexture* mStageLabel;
         Scoreboard* mStageNumber;
         float mStageLabelOnScreen;
         float mStageLabelOffScreen;
-        Texture* mReadyLabel;
+        GLTexture* mReadyLabel;
         float mReadyLabelOnScreen;
         float mReadyLabelOffScreen;
         Player* mPlayer;
@@ -51,7 +51,7 @@ namespace Galaga
         float mRespawnTimer;
         float mRespawnLabelOnScreen;
 
-        Texture* mGameOverLabel;
+        GLTexture* mGameOverLabel;
         float mGameOverDelay;
         float mGameOverTimer;
         float mGameOverLabelOnScreen;

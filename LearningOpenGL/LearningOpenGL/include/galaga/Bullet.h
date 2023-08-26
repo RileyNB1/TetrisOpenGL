@@ -2,10 +2,10 @@
 
 #include <PhysEntity.h>
 #include <Timer.h>
-#include <Texture.h>
+#include <GLTexture.h>
 #include <managers/PhysicsManager.h>
 
-using namespace sdlFr;
+using namespace FOGrP;
 
 namespace Galaga
 {
@@ -14,7 +14,7 @@ namespace Galaga
     private:
         static const int OFFSCREEN_BUFFER = 10;
         Timer* mTimer;
-        Texture* mTexture;
+        GLTexture* mTexture;
         float mSpeed;
 
         bool IgnoreCollisions() override;

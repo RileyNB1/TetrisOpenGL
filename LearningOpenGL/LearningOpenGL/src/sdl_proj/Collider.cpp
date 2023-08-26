@@ -1,8 +1,8 @@
 #include <Collider.h>
 
-namespace sdlFr
+namespace FOGrP
 {
-    void Collider::SetDebugTexture(SDLTexture* tex)
+    void Collider::SetDebugTexture(GLTexture* tex)
     {
         delete mDebugTexture;
 

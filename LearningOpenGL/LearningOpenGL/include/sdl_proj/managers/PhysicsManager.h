@@ -7,7 +7,7 @@
 #include <GameEntity.h>
 #include <PhysEntity.h>
 
-namespace sdlFr
+namespace FOGrP
 {
     class PhysicsManager
     {
