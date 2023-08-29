@@ -1,6 +1,7 @@
 #pragma once
 
 #include <math.h>
+#include <fstream>
 
 namespace FOGrP
 {
@@ -11,8 +12,7 @@ namespace FOGrP
     template<typename T>
     T clamp(T value, T lower, T upper)
     {
-        //return std::min(upper, std::max(value, lower));
-        return lower;
+        return std::min(upper, std::max(value, lower));
     }
 
     struct Vector2

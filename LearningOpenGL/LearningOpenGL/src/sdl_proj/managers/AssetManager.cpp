@@ -61,7 +61,7 @@ namespace FOGrP
 
 	SDL_Texture* AssetManager::GetTexture(std::string filename, bool managed) {
 		std::string fullPath = SDL_GetBasePath();
-		fullPath.append("Assets/" + filename);
+		fullPath.append(filename);
 
 		if (mTextures[fullPath] == nullptr) {
 			mTextures[fullPath] = Graphics::Instance()->LoadTexture(fullPath);
