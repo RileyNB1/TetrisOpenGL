@@ -53,7 +53,6 @@ namespace FOGrP
     {
         mInputManager->Update();
 
-        mScreenManager->Update();
 
         if (mInputManager->KeyDown(SDL_SCANCODE_1))
         {
@@ -71,7 +70,7 @@ namespace FOGrP
     {
         mGraphics->ClearBackBuffer();
 
-        mScreenManager->Render();
+   
 
         mGraphics->Render();
     }
@@ -95,7 +94,7 @@ namespace FOGrP
         mInputManager = InputManager::Instance();
         mAudioManager = AudioManager::Instance();
         mAssetManager = AssetManager::Instance();
-        mScreenManager = ScreenManager::Instance();
+    
         mPhysicsManager = PhysicsManager::Instance();
 
         // verify Graphics module is ready 
@@ -143,9 +142,6 @@ namespace FOGrP
 
         AudioManager::Release();
         mAudioManager = nullptr;
-
-        ScreenManager::Release();
-        mScreenManager = nullptr;
 
         mPhysicsManager->Release();
         mPhysicsManager = nullptr;

@@ -8,9 +8,7 @@
 #include <AnimatedTexture.h>
 #include <managers/AudioManager.h>
 #include <managers/PhysicsManager.h>
-#include <ScreenManager.h>
 
-using namespace Galaga;
 
 namespace FOGrP
 {
@@ -27,7 +25,7 @@ namespace FOGrP
         AssetManager* mAssetManager;
         InputManager* mInputManager;
         AudioManager* mAudioManager;
-        ScreenManager* mScreenManager;
+  
         PhysicsManager* mPhysicsManager;
 
         SDL_Event mEvent;

@@ -30,57 +30,6 @@
     <ClCompile Include="include\sdl_proj\tinyxml\tinyxml2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\galaga\BackgroundStars.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\Boss.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\Bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\Butterfly.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\CaptureBeam.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\Enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\Formation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\Level.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\PlayScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\PlaySideBar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\Scoreboard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\ScreenManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\Star.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\StarLayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\StartScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\galaga\Wasp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\opengl\BaseApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -168,57 +117,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\opengl\GLGraphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\BackgroundStars.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\Boss.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\Bullet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\Butterfly.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\CaptureBeam.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\Formation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\Level.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\PlayScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\PlaySideBar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\Scoreboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\ScreenManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\Star.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\StarLayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\StartScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\galaga\Wasp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\opengl\BaseApp.h">
