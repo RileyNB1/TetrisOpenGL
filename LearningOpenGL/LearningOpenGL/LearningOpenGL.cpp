@@ -6,11 +6,6 @@
 #define MAX_RAY_DEPTH 100
 #define PI 3.1415926535
 
-//vector 3
-
-
-
-
 
 
 

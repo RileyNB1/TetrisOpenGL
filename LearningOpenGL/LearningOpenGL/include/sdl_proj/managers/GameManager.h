@@ -1,6 +1,7 @@
 #pragma once
 
 #include <GLGraphics.h> 
+#include "Tetris/StartScreen.h"
 #include <Timer.h>
 #include <GameEntity.h>
 #include <managers/AssetManager.h>
@@ -22,6 +23,7 @@ namespace FOGrP
         
         // modules 
         Graphics* mGraphics;
+        StartScreen* mStartScreen;
         AssetManager* mAssetManager;
         InputManager* mInputManager;
         AudioManager* mAudioManager;

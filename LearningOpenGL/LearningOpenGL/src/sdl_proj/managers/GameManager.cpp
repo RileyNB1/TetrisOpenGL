@@ -52,7 +52,7 @@ namespace FOGrP
     void GameManager::Update()
     {
         mInputManager->Update();
-
+        mStartScreen->Update();
 
         if (mInputManager->KeyDown(SDL_SCANCODE_1))
         {
@@ -73,6 +73,7 @@ namespace FOGrP
    
 
         mGraphics->Render();
+        mStartScreen->Render();
     }
 
     void GameManager::TestStuff()
@@ -84,6 +85,7 @@ namespace FOGrP
         // create Graphics singleton 
         mEvent = {};
 
+        mStartScreen = new StartScreen();
         Graphics::SetMode(Graphics::RenderMode::GL);
         mGraphics = Graphics::Instance();
 
